@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 
 import { WordService } from 'src/app/services/word.service';
@@ -16,7 +15,6 @@ export class WordComponent implements OnInit {
   word: Word | null = null;
 
   constructor(
-    //private http: HttpClient,
     private route: ActivatedRoute,
     private wordService: WordService
   ) { }
