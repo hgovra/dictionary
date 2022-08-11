@@ -1,4 +1,0 @@
-interface Word {
-    word: string;
-    
-}

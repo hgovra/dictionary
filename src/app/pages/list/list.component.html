@@ -12,6 +12,6 @@
 
 <ul class="word-list" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
     <li *ngFor="let word of words">
-        <a routerLink="/word/{{word}}">{{word}}</a>
+        <a routerLink="/{{word}}">{{word}}</a>
     </li>
 </ul>

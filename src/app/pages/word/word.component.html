@@ -1,1 +1,14 @@
-<p>{{word}}</p>
+<h2>{{word?.word}}</h2>
+
+<div *ngFor="let phonetic of word?.phonetics">
+    <div class="phonetics-btn-play" *ngIf="phonetic.audio" (click)="playPhonetics(phonetic.audio)">
+        Play
+    </div>
+</div>
+
+
+<ul>
+    <li *ngFor="let meaning of word?.meanings">
+        {{ meaning.partOfSpeech }}
+    </li>
+</ul>

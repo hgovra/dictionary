@@ -5,9 +5,8 @@ import { ListComponent } from './pages/list/list.component';
 import { WordComponent } from './pages/word/word.component';
 
 const routes: Routes = [
-  { path: 'word-list', component: ListComponent },
-  { path: 'word/:word', component: WordComponent },
-  { path: '',   redirectTo: '/word-list', pathMatch: 'full' }
+  { path: '', component: ListComponent },
+  { path: ':word', component: WordComponent },
 ];
 
 @NgModule({

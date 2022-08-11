@@ -21,6 +21,9 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/dictionary",
+            "allowedCommonJsDependencies": [
+              "word-list-json"
+            ],
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
