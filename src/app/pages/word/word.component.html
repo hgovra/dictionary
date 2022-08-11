@@ -1,14 +1,23 @@
-<h2>{{word?.word}}</h2>
+<section>
+    <h2>{{word?.word}}</h2>
 
-<div *ngFor="let phonetic of word?.phonetics">
-    <div class="phonetics-btn-play" *ngIf="phonetic.audio" (click)="playPhonetics(phonetic.audio)">
+    <div *ngFor="let phonetic of word?.phonetics" class="phonetic-audio-container">
+        <audio controls *ngIf="phonetic.audio">
+            <source src="{{phonetic.audio}}" type="audio/mp3">
+            <p>Your browser doesn't support HTML5 audio. Here is a <a href="viper.mp3">link to the audio</a> instead.
+            </p>
+        </audio>
+
+
+        <!--<div class="phonetics-btn-play" *ngIf="phonetic.audio" (click)="playPhonetics(phonetic.audio)">
         Play
+    </div>-->
     </div>
-</div>
 
 
-<ul>
-    <li *ngFor="let meaning of word?.meanings">
-        {{ meaning.partOfSpeech }}
-    </li>
-</ul>
+    <ul>
+        <li *ngFor="let meaning of word?.meanings">
+            {{ meaning.partOfSpeech }}
+        </li>
+    </ul>
+</section>

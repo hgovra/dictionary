@@ -1,5 +1,18 @@
-.phonetics-btn-play {
-    height: 50px;
-    width: 50px;
-    background: blue;
+section {
+    padding: 5px;
+
+    h2 {
+        text-align: center;
+    }
+
+    .phonetic-audio-container {
+        display: flex;
+        justify-content: center;
+
+        audio {
+            margin: 5px auto;
+        }
+    }
+    
 }
+
