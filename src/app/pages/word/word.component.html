@@ -3,21 +3,60 @@
 
     <div *ngFor="let phonetic of word?.phonetics" class="phonetic-audio-container">
         <audio controls *ngIf="phonetic.audio">
-            <source src="{{phonetic.audio}}" type="audio/mp3">
-            <p>Your browser doesn't support HTML5 audio. Here is a <a href="viper.mp3">link to the audio</a> instead.
+            <source src="{{ phonetic.audio }}" type="audio/mp3">
+            <p>Your browser doesn't support HTML5 audio. Here is a <a href="{{ phonetic.audio }}">link to the audio</a>
+                instead.
             </p>
         </audio>
-
-
-        <!--<div class="phonetics-btn-play" *ngIf="phonetic.audio" (click)="playPhonetics(phonetic.audio)">
-        Play
-    </div>-->
     </div>
-
 
     <ul>
         <li *ngFor="let meaning of word?.meanings">
-            {{ meaning.partOfSpeech }}
+            <h3>{{ meaning.partOfSpeech }}</h3>
+
+            <div *ngFor="let definition of meaning.definitions">
+                <p>{{ definition.definition }}</p>
+
+                <div *ngIf="definition.synonyms.length">
+                    <h4>Synonyms</h4>
+
+                    <ul>
+                        <li *ngFor="let synonym of definition.synonyms">
+                            {{ synonym }}
+                        </li>
+                    </ul>
+                </div>
+
+                <div *ngIf="definition.antonyms.length">
+                    <h4>Antonyms</h4>
+
+                    <ul>
+                        <li *ngFor="let antonym of definition.antonyms">
+                            {{ antonym }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div *ngIf="meaning.synonyms.length">
+                <h4>Synonyms</h4>
+
+                <ul>
+                    <li *ngFor="let synonym of meaning.synonyms">
+                        {{ synonym }}
+                    </li>
+                </ul>
+            </div>
+
+            <div *ngIf="meaning.antonyms.length">
+                <h4>Antonyms</h4>
+
+                <ul>
+                    <li *ngFor="let antonym of meaning.antonyms">
+                        {{ antonym }}
+                    </li>
+                </ul>
+            </div>
         </li>
     </ul>
 </section>

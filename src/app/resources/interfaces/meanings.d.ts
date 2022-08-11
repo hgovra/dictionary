@@ -1,6 +1,6 @@
 interface Meanings {
     partOfSpeech: string;
-    definitions: Definitions;
+    definitions: Definitions[];
     synonyms: string[];
     antonyms: string[];
 }

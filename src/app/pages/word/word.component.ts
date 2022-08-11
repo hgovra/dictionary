@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 
+import { WordService } from 'src/app/services/word.service';
+
 @Component({
   selector: 'app-word',
   templateUrl: './word.component.html',
@@ -14,8 +16,10 @@ export class WordComponent implements OnInit {
   word: Word | null = null;
 
   constructor(
-    private http: HttpClient,
-    private route: ActivatedRoute) { }
+    //private http: HttpClient,
+    private route: ActivatedRoute,
+    private wordService: WordService
+  ) { }
 
   ngOnInit(): void {
     this.request = this.route.snapshot.params['word'];
@@ -24,10 +28,10 @@ export class WordComponent implements OnInit {
   }
 
   getWordDetails() {
-    return this.http.get<Word[]>(`https://api.dictionaryapi.dev/api/v2/entries/en/${this.request as string}`)
+    this.wordService.getWordDetails(this.request as string)
       .subscribe({
         next: res => {
-          this.word = { ...res[0] };console.log(this.word)
+          this.word = { ...res[0] }; console.log(this.word)
         },
         error: () => {
 
@@ -37,7 +41,7 @@ export class WordComponent implements OnInit {
 
   playPhonetics(url?: string) {
     let audio = new Audio();
-    if(url) audio.src = url;
+    if (url) audio.src = url;
 
     audio.load();
     audio.play();
