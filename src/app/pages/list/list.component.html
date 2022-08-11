@@ -1,5 +1,17 @@
+<ul>
+    <li>
+        <a routerLink="/word-list" routerLinkActive="active" ariaCurrentWhenActive="page">Word List</a>
+    </li>
+    <li>
+        <a routerLink="/history" routerLinkActive="active" ariaCurrentWhenActive="page">History</a>
+    </li>
+    <li>
+        <a routerLink="/favorites" routerLinkActive="active" ariaCurrentWhenActive="page">Favorites</a>
+    </li>
+</ul>
+
 <ul class="word-list" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
     <li *ngFor="let word of words">
-        {{word}}
+        <a routerLink="/word/{{word}}">{{word}}</a>
     </li>
 </ul>
