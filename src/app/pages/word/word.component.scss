@@ -1,8 +1,12 @@
+@import '../../app.component';
+
 section {
     padding: 5px;
+    @include text;
 
     h2 {
         text-align: center;
+        font-size: 36px;
     }
 
     .phonetic-audio-container {
