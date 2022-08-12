@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;800&display=swap');
+
+/* Variáveis de texto */
+
+@mixin text {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    letter-spacing: -.25px;
+    font-size: 14px;
+}
+
+@mixin text-bold {
+    @include text;
+    font-weight: 800;
+}
+
+/* Variáveis de cores */

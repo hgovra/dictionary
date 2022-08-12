@@ -1,9 +1,10 @@
 section {
     overflow: hidden;
     position: relative;
-    height: 180px;
+    height: 150px;
     width: 100%;
     padding-top: 10px;
+    margin-bottom: 20px;
 
     .nav {
         position: absolute;
@@ -16,6 +17,7 @@ section {
         align-items: center;
         font-size: 48px;
         z-index: 999;
+        color: #fff;
 
         &.previous {
             left: 0;
@@ -34,13 +36,13 @@ section {
         transition: 200ms;
 
         .card {
-            height: 140px;
+            height: 110px;
             width: calc(100% - 100px);
-            padding: 50px 0;
+            padding: 10px 0;
             margin: 0 50px;
             background: #f7f6f3;
             border-radius: 10px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
             display: inline-block;
             vertical-align: middle;
 
@@ -57,14 +59,14 @@ section {
                 }
 
                 .text {
-                    display: flex;
-                    font-size: 30px;
-                    justify-content: center;
-                    align-items: center;
+                    display: block;
+                    font-size: 26px;
                     height: 30px;
+                    line-height: 28px;
+                    color: #666;
 
                     + .audio {
-                        margin-top: 20px;
+                        margin-top: 5px;
                     }
                 }
 
@@ -79,11 +81,12 @@ section {
                         position: relative;
                         height: 36px;
                         width: 36px;
+                        line-height: 40px;
+                        color: #333;
 
                         .control {
                             position: absolute;
                             left: 0;
-                            top: -1px;
                         }
                     }
 
@@ -93,8 +96,8 @@ section {
                         margin: 0;
                         padding: 0;
                         height: 18px;
-                        margin: 14px 10px 0 5px;
-                        background: #FFF;
+                        margin: 10px 0 0 5px;
+                        background: #666;
                         float: left;
                         overflow: hidden;
                         border-radius: 4px;
@@ -116,7 +119,7 @@ section {
     }
 
     .dots {
-        margin: 150px auto 0;
+        margin: 124px auto 0;
         text-align: center;
 
         .dot {
@@ -125,11 +128,12 @@ section {
             margin: 0 10px;
             display: inline-block;
             border-radius: 50%;
-            background: #000;
+            background: #666;
             cursor: pointer;
+            transition: 200ms;
 
             &.selected {
-                background: white;
+                background: rgb(255, 255, 236);
             }
         }
     }

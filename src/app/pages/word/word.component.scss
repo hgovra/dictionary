@@ -1,17 +1,26 @@
-@import "../../app.component";
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
+@import "../../../assets/scss/vars";
 
 article {
-    @include text;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 
     h2 {
+        font-family: 'Itim', cursive;
+        font-size: 64px;
+        line-height: 48px;
         text-align: center;
-        font-size: 36px;
+        margin: 40px 0 16px;
+        color: #FFF;
     }
 
-    
-
     .meanings {
-        padding: 20px;
+        @include text;
+        flex-grow: 1;
+        background: #f7f6f3;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 
         .tabs {
             list-style: none;
@@ -27,12 +36,13 @@ article {
                 font-size: 20px;
 
                 &.selected {
-                    background: yellow;
+                    background: #fff;
                 }
             }
         }
 
         .content {
+            padding: 20px;
             display: none;
 
             &.active {

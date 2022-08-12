@@ -38,6 +38,8 @@
                         </li>
                     </ul>
                 </div>
+
+                <p *ngIf="definition.example">Example: {{ definition.example }}</p>
             </div>
 
             <div *ngIf="meaning.synonyms.length">
