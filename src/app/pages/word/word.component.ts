@@ -30,9 +30,15 @@ export class WordComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.active = 0;
+    this.selected = 0;
+
     if (!this.cache) {
       let emptyCache = {
+        nav: 0,
         list: [],
+        history: [],
+        favorites: [],
         requested: []
       }
 
@@ -74,7 +80,7 @@ export class WordComponent implements OnInit {
           updatedRequested.push(this.word);
 
           let updatedCache = {
-            list: [...this.cache.list],
+            ...this.cache,
             requested: updatedRequested
           }
 

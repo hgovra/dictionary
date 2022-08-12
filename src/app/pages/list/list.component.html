@@ -1,17 +1,17 @@
-<nav>
-    <ul>
-        <li>
-            <a routerLink="/word-list" routerLinkActive="active" ariaCurrentWhenActive="page">Word List</a>
-        </li>
-        <li>
-            <a routerLink="/history" routerLinkActive="active" ariaCurrentWhenActive="page">History</a>
-        </li>
-        <li>
-            <a routerLink="/favorites" routerLinkActive="active" ariaCurrentWhenActive="page">Favorites</a>
-        </li>
-    </ul>
-</nav>
+<h1>
+    <fa-icon class="logo" [icon]="book"></fa-icon> Dictionary
+</h1>
 
-<ul class="word-list" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
-    <pill *ngFor="let word of words" [content]="word"></pill>
-</ul>
+<main>
+    <nav>
+        <ul>
+            <li *ngFor="let tab of tabs; ; let i = index" [ngClass]="{'selected': nav === i}" (click)="changeTab(i)">
+                {{ tabs[i] }}
+            </li>
+        </ul>
+    </nav>
+
+    <div class="list" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
+        <stack [content]="list"></stack>
+    </div>
+</main>

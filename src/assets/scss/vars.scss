@@ -12,9 +12,13 @@
 @mixin text-bold {
     @include text;
     font-weight: 800;
+    letter-spacing: 0.1px;
 }
 
 /* Variáveis de cores */
+$highlight: #fff;
 $text: #222;
 $block: #f7f6f3;
 $nav: #666;
+$link: #ccc;
+$shadow: #999;

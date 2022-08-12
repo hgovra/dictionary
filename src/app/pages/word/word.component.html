@@ -11,7 +11,7 @@
             </li>
         </ul>
 
-        <div class="meanings">
+        <div class="tab-content">
             <div *ngFor="let meaning of word.meanings; let i = index" class="content"
                 [ngClass]="{'active': active === i}">
 
@@ -30,25 +30,13 @@
                         <div *ngIf="definition.synonyms.length" class="related">
                             <h4>Synonyms</h4>
 
-                            <ul>
-                                <li *ngFor="let synonym of definition.synonyms">
-                                    <a routerLink="/{{ synonym }}">
-                                        {{ synonym }}
-                                    </a>
-                                </li>
-                            </ul>
+                            <stack [content]="definition.synonyms"></stack>
                         </div>
 
                         <div *ngIf="definition.antonyms.length" class="related">
                             <h4>Antonyms</h4>
 
-                            <ul>
-                                <li *ngFor="let antonym of definition.antonyms">
-                                    <a routerLink="/{{ antonym }}">
-                                        {{ antonym }}
-                                    </a>
-                                </li>
-                            </ul>
+                            <stack [content]="definition.antonyms"></stack>
                         </div>
 
                         <p class="example" *ngIf="definition.example">&ldquo;{{ definition.example }}&rdquo;</p>
@@ -58,25 +46,13 @@
                 <div *ngIf="meaning.synonyms.length" class="related">
                     <h4>Synonyms</h4>
 
-                    <ul>
-                        <li *ngFor="let synonym of meaning.synonyms">
-                            <a routerLink="/{{ synonym }}">
-                                {{ synonym }}
-                            </a>
-                        </li>
-                    </ul>
+                    <stack [content]="meaning.synonyms"></stack>
                 </div>
 
                 <div *ngIf="meaning.antonyms.length" class="related">
                     <h4>Antonyms</h4>
 
-                    <ul>
-                        <li *ngFor="let antonym of meaning.antonyms">
-                            <a routerLink="/{{ antonym }}">
-                                {{ antonym }}
-                            </a>
-                        </li>
-                    </ul>
+                    <stack [content]="meaning.antonyms"></stack>
                 </div>
             </div>
         </div>

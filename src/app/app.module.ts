@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { ListComponent } from './pages/list/list.component';
 import { WordComponent } from './pages/word/word.component';
 import { BannerComponent } from './components/banner/banner.component';
-import { PillComponent } from './components/pill/pill.component';
+import { StackComponent } from './components/stack/stack.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import { PillComponent } from './components/pill/pill.component';
     ListComponent,
     WordComponent,
     BannerComponent,
-    PillComponent
+    StackComponent,
   ],
   imports: [
     BrowserModule,

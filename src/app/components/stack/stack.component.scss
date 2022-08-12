@@ -1,0 +1,21 @@
+@import "../../../assets/scss/vars";
+
+ul{
+    list-style: none;
+    text-align: center;
+    padding: 0;
+
+    li {
+        background: $link;
+        padding: 15px;
+        display: inline-block;
+        margin: 5px;
+        border-radius: 20px;
+
+        a {
+            text-decoration: none;
+            color: $highlight;
+            @include text-bold;
+        }
+    }
+}

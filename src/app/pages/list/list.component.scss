@@ -1,20 +1,47 @@
-@import '../../../assets/scss/vars';
+@import "../../../assets/scss/vars";
 
-.word-list {
-    display: grid;
-    grid-template-columns: auto auto auto;
-    list-style: none;
-    padding: 0;
-    margin: 5px;
+h1 {
+    text-align: center;
+    @include text-bold;
+    font-size: 36px;
+    color: $highlight;
+}
 
-    li {
-        display: flex;
-        text-align: center;
-        justify-content: center;
-        align-items: center;
-        padding: 10px 0;
-        height: 50px;
-        @include text;
-        font-size: 14px;
+main {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    
+    nav {
+        ul {
+            list-style: none;
+            display: flex;
+            flex-direction: row;
+            gap: 5px;
+            padding: 0;
+            margin: 0;
+            background: $shadow;
+            margin: 0;
+            @include text;
+
+            > li {
+                padding: 20px;
+                background: $link;
+                font-size: 20px;
+                flex: 1;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+
+                &.selected {
+                    background: $block;
+                }
+            }
+        }
+    }
+
+    .list {
+        padding: 0 30px;
+        background: $block;
+        overflow-y: auto;
+        height: calc(100vh - 64px);
     }
 }

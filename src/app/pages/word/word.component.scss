@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
-
 @import "../../../assets/scss/vars";
 
 article {
@@ -8,12 +6,12 @@ article {
     height: 100%;
 
     h2 {
-        font-family: "Itim", cursive;
+        @include text-bold;
         font-size: 64px;
         line-height: 48px;
         text-align: center;
         margin: 40px 0 16px;
-        color: #fff;
+        color: $highlight;
     }
 
     .top-container {
@@ -31,13 +29,13 @@ article {
             flex-direction: row;
             gap: 5px;
             padding: 0;
-            background: #999;
+            background: $shadow;
             margin: 0;
             @include text;
 
             > li {
                 padding: 20px;
-                background: #ccc;
+                background: $link;
                 font-size: 20px;
 
                 &.selected {
@@ -46,7 +44,7 @@ article {
             }
         }
 
-        .meanings {
+        .tab-content {
             @include text;
             flex-grow: 1;
             display: flex;
@@ -75,7 +73,7 @@ article {
                     font-size: 28px;
                     z-index: 999;
                     background: $nav;
-                    color: #fff;
+                    color: $highlight;
 
                     &.previous {
                         left: 0;
@@ -103,37 +101,17 @@ article {
                         font-size: 18px;
                         line-height: 20px;
                         text-align: center;
-                        background: #fff;
+                        background: $highlight;
                         border-radius: 20px;
                         margin-bottom: 0;
                     }
                 }
 
                 .related {
-
                     h4 {
                         margin: 0 0 10px;
                         font-size: 16px;
                         text-align: center;
-                    }
-
-                    ul{
-                        list-style: none;
-                        text-align: center;
-                        padding: 0;
-
-                        li {
-                            background: #fff;
-                            padding: 15px;
-                            display: inline-block;
-                            margin: 5px;
-                            border-radius: 20px;
-
-                            a {
-                                text-decoration: none;
-                                color: $text;
-                            }
-                        }
                     }
                 }
             }
