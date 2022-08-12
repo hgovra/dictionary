@@ -33,7 +33,7 @@ export class ListComponent implements OnInit {
     this.words = [... this.words, ...this.moreWords];
   }
 
-  getMoreWords(amount = 30): void {
+  getMoreWords(amount = 60): void {
     this.moreWords = [];
 
     for (let i = 0; i < amount; i++) {
