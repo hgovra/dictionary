@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
 
 @import "../../../assets/scss/vars";
 
@@ -8,19 +8,22 @@ article {
     height: 100%;
 
     h2 {
-        font-family: 'Itim', cursive;
+        font-family: "Itim", cursive;
         font-size: 64px;
         line-height: 48px;
         text-align: center;
         margin: 40px 0 16px;
-        color: #FFF;
+        color: #fff;
     }
 
-    .meanings {
-        @include text;
+    .top-container {
         flex-grow: 1;
-        background: #f7f6f3;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        overflow-y: auto;
+        position: relative;
 
         .tabs {
             list-style: none;
@@ -29,6 +32,8 @@ article {
             gap: 5px;
             padding: 0;
             background: #999;
+            margin: 0;
+            @include text;
 
             > li {
                 padding: 20px;
@@ -36,17 +41,101 @@ article {
                 font-size: 20px;
 
                 &.selected {
-                    background: #fff;
+                    background: $block;
                 }
             }
         }
 
-        .content {
-            padding: 20px;
-            display: none;
+        .meanings {
+            @include text;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            background: $block;
+            padding-top: 10px;
+            overflow-y: auto;
 
-            &.active {
-                display: block;
+            .content {
+                display: none;
+                flex-direction: column;
+                transition: 200ms;
+
+                &.active {
+                    display: block;
+                }
+
+                .nav {
+                    position: absolute;
+                    width: 40px;
+                    height: 40px;
+                    top: 100px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 28px;
+                    z-index: 999;
+                    background: $nav;
+                    color: #fff;
+
+                    &.previous {
+                        left: 0;
+                        border-radius: 0 10px 10px 0;
+                    }
+                    &.next {
+                        right: 0;
+                        border-radius: 10px 0 0 10px;
+                    }
+                }
+
+                .container {
+                    padding: 0 50px 20px;
+                }
+
+                .sub-content {
+                    display: none;
+
+                    &.selected {
+                        display: block;
+                    }
+
+                    .example {
+                        padding: 20px;
+                        font-size: 18px;
+                        line-height: 20px;
+                        text-align: center;
+                        background: #fff;
+                        border-radius: 20px;
+                        margin-bottom: 0;
+                    }
+                }
+
+                .related {
+
+                    h4 {
+                        margin: 0 0 10px;
+                        font-size: 16px;
+                        text-align: center;
+                    }
+
+                    ul{
+                        list-style: none;
+                        text-align: center;
+                        padding: 0;
+
+                        li {
+                            background: #fff;
+                            padding: 15px;
+                            display: inline-block;
+                            margin: 5px;
+                            border-radius: 20px;
+
+                            a {
+                                text-decoration: none;
+                                color: $text;
+                            }
+                        }
+                    }
+                }
             }
         }
     }

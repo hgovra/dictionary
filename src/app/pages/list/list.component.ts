@@ -10,6 +10,8 @@ import wordList from 'word-list-json';
 })
 export class ListComponent implements OnInit {
 
+  cache = localStorage.getItem('dictionary-cache');
+
   words: string[] = [];
   moreWords: string[] = [];
 
@@ -19,6 +21,13 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateWordList();
+
+    if(!this.cache) {
+      const emptyCache = {
+        list: [],
+        requested: []
+      }
+    }
   }
 
   get randomWord(): string {
