@@ -1,9 +1,29 @@
 section {
-    background: blue;
     overflow: hidden;
     position: relative;
     height: 180px;
     width: 100%;
+    padding-top: 10px;
+
+    .nav {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 50px;
+        padding-bottom: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 48px;
+        z-index: 999;
+
+        &.previous {
+            left: 0;
+        }
+        &.next {
+            right: 0;
+        }
+    }
 
     .banner {
         white-space: nowrap;
@@ -14,11 +34,11 @@ section {
         transition: 200ms;
 
         .card {
-            height: 150px;
+            height: 140px;
             width: calc(100% - 100px);
             padding: 50px 0;
             margin: 0 50px;
-            background: #efefef;
+            background: #f7f6f3;
             border-radius: 10px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
             display: inline-block;
@@ -61,7 +81,7 @@ section {
     }
 
     .dots {
-        margin: 160px auto 0;
+        margin: 150px auto 0;
         text-align: center;
 
         .dot {

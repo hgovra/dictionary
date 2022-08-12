@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-
+import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'banner',
   templateUrl: './banner.component.html',
@@ -11,6 +11,9 @@ export class BannerComponent implements OnInit {
   cards: Phonetics[] = [];
 
   selected = 0;
+
+  previous = faAngleLeft;
+  next = faAngleRight;
 
   constructor() { }
 
