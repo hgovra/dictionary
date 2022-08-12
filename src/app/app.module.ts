@@ -9,12 +9,14 @@ import { AppComponent } from './app.component';
 
 import { ListComponent } from './pages/list/list.component';
 import { WordComponent } from './pages/word/word.component';
+import { BannerComponent } from './components/banner/banner.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListComponent,
-    WordComponent
+    WordComponent,
+    BannerComponent
   ],
   imports: [
     BrowserModule,

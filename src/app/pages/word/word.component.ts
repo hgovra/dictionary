@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { WordService } from 'src/app/services/word.service';
 
 @Component({
-  selector: 'app-word',
+  selector: 'word',
   templateUrl: './word.component.html',
   styleUrls: ['./word.component.scss']
 })
@@ -36,6 +36,8 @@ export class WordComponent implements OnInit {
   getWordDetails() {
     this.word = null;
     this.failure = null;
+
+    this.active = 0;
 
     this.wordService.getWord(this.request as string)
       .subscribe({

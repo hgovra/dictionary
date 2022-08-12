@@ -1,25 +1,7 @@
-<section *ngIf="word">
+<article *ngIf="word">
     <h2>{{ word.word }}</h2>
 
-    <div *ngIf="word?.phonetics?.length" class="phonetics">
-
-        <div *ngFor="let phonetic of word?.phonetics; let i = index" class="card">
-            <div class="pad">
-                <span *ngIf="phonetic.text" class="text">{{ phonetic.text }}</span>
-
-                <div class="audio" *ngIf="phonetic.audio">
-                    <audio controls>
-                        <source src="{{ phonetic.audio }}" type="audio/mp3">
-                        <p>Your browser doesn't support HTML5 audio. Here is a <a href="{{ phonetic.audio }}">link to
-                                the
-                                audio</a>
-                            instead.
-                        </p>
-                    </audio>
-                </div>
-            </div>
-        </div>
-    </div>
+    <banner *ngIf="word.phonetics" [cards]="word.phonetics"></banner>
 
     <div *ngIf="word.meanings" class="meanings">
         <ul class="tabs">
@@ -83,12 +65,13 @@
             </div>
         </div>
     </div>
-</section>
 
-<section *ngIf="failure">
+</article>
+
+<article *ngIf="failure">
     <h2>{{ failure.title }}</h2>
 
     <p>{{ failure.message }}</p>
 
     <p>{{ failure.resolution }}</p>
-</section>
+</article>

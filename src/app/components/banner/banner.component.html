@@ -1,0 +1,23 @@
+<section *ngIf="cards?.length">
+    <div class="banner" [ngStyle]="{'margin-left': + (selected * -100) + '%'}">
+        <div *ngFor="let card of cards; let i = index" class="card">
+            <div class="pad">
+                <span *ngIf="card.text" class="text">{{ card.text }}</span>
+
+                <div class="audio" *ngIf="card.audio">
+                    <audio controls>
+                        <source src="{{ card.audio }}" type="audio/mp3">
+                        <p>Your browser doesn't support HTML5 audio. Here is a <a href="{{ card.audio }}">link
+                                to the audio</a> instead.
+                        </p>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dots">
+        <div *ngFor="let card of cards; let i = index" class="dot" (click)="selected = i"
+            [ngClass]="{'selected': selected === i}"></div>
+    </div>
+</section>
