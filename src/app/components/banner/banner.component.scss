@@ -71,9 +71,44 @@ section {
                 .audio {
                     display: flex;
                     justify-content: center;
+                    width: 100%;
+                    padding: 0 20px;
 
-                    audio {
-                        margin: 0 auto;
+                    .controls {
+                        font-size: 36px;
+                        position: relative;
+                        height: 36px;
+                        width: 36px;
+
+                        .control {
+                            position: absolute;
+                            left: 0;
+                            top: -1px;
+                        }
+                    }
+
+                    .duration {
+                        position: relative;
+                        width: 70%;
+                        margin: 0;
+                        padding: 0;
+                        height: 18px;
+                        margin: 14px 10px 0 5px;
+                        background: #FFF;
+                        float: left;
+                        overflow: hidden;
+                        border-radius: 4px;
+
+                        .elapsed {
+                            position: absolute;
+                            content: "";
+                            top: 0;
+                            left: 0;
+                            width: 0;
+                            height: 18px;
+                            background-color: #007db5;
+                            cursor: pointer;
+                        }
                     }
                 }
             }

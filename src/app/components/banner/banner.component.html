@@ -1,20 +1,27 @@
 <section *ngIf="cards?.length">
-    <fa-icon class="nav previous" [icon]="previous" *ngIf="selected > 0"
-    (click)="selected = selected - 1"></fa-icon>
-    <fa-icon class="nav next" [icon]="next"  *ngIf="selected < cards.length - 1"
-    (click)="selected = selected + 1"></fa-icon>
+    <fa-icon class="nav previous" [icon]="previous" *ngIf="selected > 0" (click)="selected = selected - 1"></fa-icon>
+    <fa-icon class="nav next" [icon]="next" *ngIf="selected < cards.length - 1" (click)="selected = selected + 1">
+    </fa-icon>
 
-    <div class="banner" [ngStyle]="{'margin-left': + (selected * -100) + '%'}">
+    <div class="banner" [ngStyle]="{'margin-left': (selected * -100) + '%'}">
         <div *ngFor="let card of cards; let i = index" class="card">
             <div class="pad">
                 <span *ngIf="card.text" class="text">{{ card.text }}</span>
 
                 <div class="audio" *ngIf="card.audio">
-                    <audio controls>
+                    <div class="controls">
+                        <fa-icon class="control play" *ngIf="isPaused" [icon]="play"
+                            (click)="sound.play(); isPaused = false"></fa-icon>
+                        <fa-icon class="control pause" *ngIf="!isPaused" [icon]="pause"
+                            (click)="sound.pause(); isPaused = true"></fa-icon>
+                    </div>
+
+                    <div class="duration">
+                        <div class="elapsed" [ngStyle]="{'width': played + '%'}"></div>
+                    </div>
+
+                    <audio #sound (ended)="isPaused = true; sound.currentTime = 0" (timeupdate)="updatePlayed(sound)">
                         <source src="{{ card.audio }}" type="audio/mp3">
-                        <p>Your browser doesn't support HTML5 audio. Here is a <a href="{{ card.audio }}">link
-                                to the audio</a> instead.
-                        </p>
                     </audio>
                 </div>
             </div>

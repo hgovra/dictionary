@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { faAngleLeft, faAngleRight, faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'banner',
   templateUrl: './banner.component.html',
@@ -12,8 +12,17 @@ export class BannerComponent implements OnInit {
 
   selected = 0;
 
+  @ViewChild("sound")
+  sound!: ElementRef;
+
+  isPaused = true;
+  played = 0;
+
+  // Ícones da UI
   previous = faAngleLeft;
   next = faAngleRight;
+  play = faPlay;
+  pause = faPause;
 
   constructor() { }
 
@@ -21,4 +30,7 @@ export class BannerComponent implements OnInit {
     this.selected = 0;
   }
 
+  updatePlayed(audio: HTMLAudioElement) {
+    this.played = audio.currentTime / audio.duration * 100;
+  }
 }
