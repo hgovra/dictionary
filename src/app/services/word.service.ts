@@ -10,7 +10,7 @@ export class WordService {
     private http: HttpClient,
   ) { }
 
-  getWordDetails(word: string) {
+  getWord(word: string) {
     return this.http.get<Word[]>(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
   }
 }

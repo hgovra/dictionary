@@ -13,6 +13,9 @@ export class WordComponent implements OnInit {
   request: string | null = null;
 
   word: Word | null = null;
+  failure: Fail | null = null;
+
+  active = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,13 +29,13 @@ export class WordComponent implements OnInit {
   }
 
   getWordDetails() {
-    this.wordService.getWordDetails(this.request as string)
+    this.wordService.getWord(this.request as string)
       .subscribe({
         next: res => {
-          this.word = { ...res[0] }; console.log(this.word)
+          this.word = res[0];
         },
-        error: () => {
-
+        error: fail => {
+          this.failure = fail.error;
         }
       });
   }

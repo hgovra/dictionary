@@ -1,5 +1,6 @@
 interface Phonetics {
-    audio: string;
+    text?: string;
+    audio?: string;
     //sourceUrl
     //license
 }

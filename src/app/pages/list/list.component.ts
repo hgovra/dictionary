@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { WordService } from 'src/app/services/word.service';
 
 import wordList from 'word-list-json';
 
@@ -12,7 +13,9 @@ export class ListComponent implements OnInit {
   words: string[] = [];
   moreWords: string[] = [];
 
-  constructor() { }
+  constructor(
+    private wordService: WordService
+  ) { }
 
   ngOnInit(): void {
     this.updateWordList();
@@ -27,14 +30,16 @@ export class ListComponent implements OnInit {
   updateWordList(): void {
     this.getMoreWords();
 
-    this.words = [ ... this.words, ...this.moreWords ];
+    this.words = [... this.words, ...this.moreWords];
   }
 
-  getMoreWords(amount = 120): void {
+  getMoreWords(amount = 30): void {
     this.moreWords = [];
 
     for (let i = 0; i < amount; i++) {
-      this.moreWords.push(this.randomWord);
+      let newWord = this.randomWord;
+
+      this.moreWords.push(newWord);
     }
   }
 

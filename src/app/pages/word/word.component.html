@@ -1,19 +1,35 @@
-<section>
-    <h2>{{word?.word}}</h2>
+<section *ngIf="word">
+    <h2>{{ word.word }}</h2>
 
-    <div *ngFor="let phonetic of word?.phonetics" class="phonetic-audio-container">
-        <audio controls *ngIf="phonetic.audio">
-            <source src="{{ phonetic.audio }}" type="audio/mp3">
-            <p>Your browser doesn't support HTML5 audio. Here is a <a href="{{ phonetic.audio }}">link to the audio</a>
-                instead.
-            </p>
-        </audio>
+    <div *ngIf="word?.phonetics?.length" class="phonetics">
+
+        <div *ngFor="let phonetic of word?.phonetics; let i = index" class="card">
+            <div class="pad">
+                <span *ngIf="phonetic.text" class="text">{{ phonetic.text }}</span>
+
+                <div class="audio" *ngIf="phonetic.audio">
+                    <audio controls>
+                        <source src="{{ phonetic.audio }}" type="audio/mp3">
+                        <p>Your browser doesn't support HTML5 audio. Here is a <a href="{{ phonetic.audio }}">link to
+                                the
+                                audio</a>
+                            instead.
+                        </p>
+                    </audio>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <ul>
-        <li *ngFor="let meaning of word?.meanings">
-            <h3>{{ meaning.partOfSpeech }}</h3>
+    <div *ngIf="word.meanings" class="meanings">
+        <ul class="tabs">
+            <li *ngFor="let meaning of word?.meanings; let i = index" [ngClass]="{'selected': active === i}"
+                (click)="active = i">
+                {{ meaning.partOfSpeech }}
+            </li>
+        </ul>
 
+        <div *ngFor="let meaning of word?.meanings; let i = index" class="content" [ngClass]="{'active': active === i}">
             <div *ngFor="let definition of meaning.definitions">
                 <p>{{ definition.definition }}</p>
 
@@ -57,6 +73,14 @@
                     </li>
                 </ul>
             </div>
-        </li>
-    </ul>
+        </div>
+    </div>
+</section>
+
+<section *ngIf="failure">
+    <h2>{{ failure.title }}</h2>
+
+    <p>{{ failure.message }}</p>
+
+    <p>{{ failure.resolution }}</p>
 </section>
