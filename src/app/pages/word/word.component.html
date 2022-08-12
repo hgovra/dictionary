@@ -38,7 +38,9 @@
 
                     <ul>
                         <li *ngFor="let synonym of definition.synonyms">
-                            {{ synonym }}
+                            <a routerLink="/{{ synonym }}">
+                                {{ synonym }}
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -48,7 +50,9 @@
 
                     <ul>
                         <li *ngFor="let antonym of definition.antonyms">
-                            {{ antonym }}
+                            <a routerLink="/{{ antonym }}">
+                                {{ antonym }}
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -59,7 +63,9 @@
 
                 <ul>
                     <li *ngFor="let synonym of meaning.synonyms">
-                        {{ synonym }}
+                        <a routerLink="/{{ synonym }}">
+                            {{ synonym }}
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -69,7 +75,9 @@
 
                 <ul>
                     <li *ngFor="let antonym of meaning.antonyms">
-                        {{ antonym }}
+                        <a routerLink="/{{ antonym }}">
+                            {{ antonym }}
+                        </a>
                     </li>
                 </ul>
             </div>

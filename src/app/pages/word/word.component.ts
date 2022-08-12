@@ -23,12 +23,20 @@ export class WordComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.request = this.route.snapshot.params['word'];
+    this.route.params
+      .subscribe(
+        params => {
+          this.request = params['word'];
 
-    this.getWordDetails();
+          this.getWordDetails();
+        }
+      );
   }
 
   getWordDetails() {
+    this.word = null;
+    this.failure = null;
+
     this.wordService.getWord(this.request as string)
       .subscribe({
         next: res => {
