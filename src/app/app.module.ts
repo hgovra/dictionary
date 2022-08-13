@@ -18,6 +18,7 @@ import { StackComponent } from './components/stack/stack.component';
 import { StartComponent } from './components/start/start.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { FailureComponent } from './components/failure/failure.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { FailureComponent } from './components/failure/failure.component';
     StartComponent,
     TabsComponent,
     FailureComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,

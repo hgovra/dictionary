@@ -39,6 +39,9 @@ export class DesktopComponent implements OnInit {
           let request = params['word'] as string;
           this.wordService.request = request;
 
+          // Carregar os dados da palavra (API ou localStorage)
+          if (this.wordService.request) this.wordService.getWordDetails();
+
           // É favoritada ou não?
           let indexFavved = this.wordService.favorites.indexOf(request);
 
@@ -47,9 +50,6 @@ export class DesktopComponent implements OnInit {
           } else {
             this.wordService.favved = false;
           }
-
-          // Carregar os dados da palavra (API ou localStorage)
-          if (this.wordService.request) this.wordService.getWordDetails();
 
           // Atualizar o título na aba do navegador
           if (this.wordService.request) {

@@ -1,18 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;800&display=swap");
 
 // Texto
 
 @mixin text {
-    font-family: 'Work Sans', sans-serif;
-    font-weight: 500;
-    letter-spacing: -.25px;
-    font-size: 14px;
+	font-family: "Work Sans", sans-serif;
+	font-weight: 500;
+	letter-spacing: -0.25px;
+	font-size: 14px;
 }
 
 @mixin text-bold {
-    @include text;
-    font-weight: 800;
-    letter-spacing: 0.1px;
+	@include text;
+	font-weight: 800;
+	letter-spacing: 0.1px;
 }
 
 // Cores
@@ -38,3 +38,11 @@ $shadow: #999;
 	}
 }
 
+@keyframes flash {
+	0% {
+		background-color: $shadow;
+	}
+	100% {
+		background-position: $link;
+	}
+}

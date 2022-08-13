@@ -1,0 +1,15 @@
+@import "../../../assets/scss/vars";
+
+.loading {
+    height: 100%;
+    overflow: hidden;
+    background: $link;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: flash 2s ease infinite;
+    animation-direction: alternate;
+    @include text-bold;
+    font-size: 30px;
+}

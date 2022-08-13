@@ -9,6 +9,8 @@
         </section>
 
         <section class="info">
+            <loading *ngIf="wordService.isLoading"></loading>
+
             <ng-container *ngIf="!wordService.isLoading">
                 <article *ngIf="wordService.word" class="word">
                     <h2>{{ wordService.word.word }}

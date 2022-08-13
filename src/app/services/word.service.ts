@@ -153,7 +153,7 @@ export class WordService {
 
           this.requested.splice(start, count, this.word);
 
-          this.saveCache();
+          this.isLoading = false;
         },
         error: fail => {
           if (fail.status === 0) { // Erro de conexão
@@ -175,6 +175,8 @@ export class WordService {
 
             this.requested.unshift(notFound);
           }
+
+          this.isLoading = false;
         }
       });
   }
@@ -208,11 +210,11 @@ export class WordService {
 
       this.history.splice(historyIndex, 1);
       this.history.unshift(request);
+
+      this.isLoading = false;
     }
 
     this.saveCache();
-
-    this.isLoading = false;
   }
 
   // Reproduzir áudio dos fonemas disponíveis

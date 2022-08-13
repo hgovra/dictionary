@@ -1,20 +1,24 @@
-<main *ngIf="!wordService.isLoading">
-    <article *ngIf="wordService.word" class="word">
-        <h1 routerLink="/">
-            <fa-icon class="logo" [icon]="book"></fa-icon> Dictionary
-        </h1>
+<main>
+    <loading *ngIf="wordService.isLoading"></loading>
 
-        <h2>{{ wordService.word.word }}
-            <fa-icon class="fav off" [icon]="off" *ngIf="!wordService.favved" (click)="wordService.saveFavorite()">
-            </fa-icon>
-            <fa-icon class="fav on" [icon]="on" *ngIf="wordService.favved" (click)="wordService.removeFavorite()">
-            </fa-icon>
-        </h2>
+    <ng-container *ngIf="!wordService.isLoading">
+        <article *ngIf="wordService.word" class="word">
+            <h1 routerLink="/">
+                <fa-icon class="logo" [icon]="book"></fa-icon> Dictionary
+            </h1>
 
-        <banner *ngIf="wordService.word.phonetics" [cards]="wordService.word.phonetics"></banner>
+            <h2>{{ wordService.word.word }}
+                <fa-icon class="fav off" [icon]="off" *ngIf="!wordService.favved" (click)="wordService.saveFavorite()">
+                </fa-icon>
+                <fa-icon class="fav on" [icon]="on" *ngIf="wordService.favved" (click)="wordService.removeFavorite()">
+                </fa-icon>
+            </h2>
 
-        <tabs *ngIf="wordService.word.meanings" [tabs]="wordService.word.meanings"></tabs>
-    </article>
+            <banner *ngIf="wordService.word.phonetics" [cards]="wordService.word.phonetics"></banner>
 
-    <failure *ngIf="wordService.failure" [header]="true"></failure>
+            <tabs *ngIf="wordService.word.meanings" [tabs]="wordService.word.meanings"></tabs>
+        </article>
+
+        <failure *ngIf="wordService.failure" [header]="true"></failure>
+    </ng-container>
 </main>
