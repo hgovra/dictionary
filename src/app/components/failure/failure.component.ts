@@ -9,6 +9,7 @@ import { WordService } from 'src/app/services/word.service';
 })
 export class FailureComponent implements OnInit {
 
+  // Mostrar o título ou não
   @Input()
   header = false;
 

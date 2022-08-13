@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { faAngleLeft, faAngleRight, faBookBookmark, faSadTear, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faBookBookmark, faStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as offStar } from '@fortawesome/free-regular-svg-icons';
 
 import { WordService } from 'src/app/services/word.service';
@@ -25,12 +25,14 @@ export class WordComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // Atualizar os dados na tela com a palavra selecionada
     this.route.params
       .subscribe(
         params => {
           let request = params['word'] as string;
           this.wordService.request = request;
 
+          // É favoritada ou não?
           let indexFavved = this.wordService.favorites.indexOf(request);
 
           if (indexFavved !== -1) {
@@ -39,8 +41,10 @@ export class WordComponent implements OnInit {
             this.wordService.favved = false;
           }
 
+          // Carregar os dados da palavra (API ou localStorage)
           if (this.wordService.request) this.wordService.getWordDetails();
 
+          // Atualizar o título na aba do navegador
           if (this.wordService.request) {
             this.titleService.setTitle('Dictionary — ' + request);
           } else {

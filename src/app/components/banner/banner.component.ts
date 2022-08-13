@@ -1,11 +1,11 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { faAngleLeft, faAngleRight, faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'banner',
   templateUrl: './banner.component.html',
   styleUrls: ['./banner.component.scss']
 })
-export class BannerComponent implements OnInit {
+export class BannerComponent implements OnInit, OnChanges {
 
   @Input()
   cards: Phonetics[] = [];
@@ -27,9 +27,14 @@ export class BannerComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
+  }
+
+  ngOnChanges() {
     this.selected = 0;
   }
 
+  // Função que atualiza o tempo de áudio
   updatePlayed(audio: HTMLAudioElement) {
     this.played = audio.currentTime / audio.duration * 100;
   }

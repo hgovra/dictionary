@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faArrowsRotate, faBookBookmark } from '@fortawesome/free-solid-svg-icons';
-
-import wordList from 'word-list-json';
+import { faBookBookmark } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'list',

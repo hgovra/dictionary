@@ -9,6 +9,7 @@ export class ScreenService {
   constructor(
     ngZone: NgZone
   ) {
+    // Obter largura da tela
     window.onresize = e => {
       ngZone.run(() => {
         this.width.next(window.innerWidth);

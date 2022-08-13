@@ -7,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class StackComponent implements OnInit {
 
+  // Coleção de palavras
   @Input()
   content: string[] = [];
 

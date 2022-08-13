@@ -19,6 +19,7 @@ export class StartComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // Invoca a função de carregar mais palavras para gerar a rolagem infinita
   onScroll(): void {
     if (this.wordService.nav === 0) this.wordService.updateWordList();
   }

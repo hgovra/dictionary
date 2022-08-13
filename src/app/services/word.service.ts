@@ -9,6 +9,8 @@ import wordList from 'word-list-json';
 export class WordService {
 
   isLoading = true;
+
+  // Dados off-line
   cache: CacheStorage = JSON.parse(localStorage.getItem('dictionary-cache') as string) as unknown as CacheStorage;
 
   list: string[] = [];
@@ -19,8 +21,10 @@ export class WordService {
   favorites: string[] = [];
   requested: Word[] = [];
 
+  // Palavra a ser consultada
   request: string | null = null;
 
+  // Dados dinâmicos da UI
   word: Word | null = null;
 
   tabs = ['List', 'History', 'Favorites'];
@@ -45,6 +49,7 @@ export class WordService {
   constructor(
     private http: HttpClient,
   ) {
+    // Se não houver cache, criar um novo
     if (!this.cache) {
       let emptyCache = {
         nav: 0,
@@ -56,6 +61,7 @@ export class WordService {
 
       this.cache = emptyCache as unknown as CacheStorage;
 
+      // Carregar palavras se não houver nenhuma
       if (!this.words.length) this.updateWordList();
 
       this.saveCache();
@@ -70,6 +76,7 @@ export class WordService {
     this.changeTab(this.nav);
   }
 
+  // Salvar os dados em cache (localStorage)
   saveCache(): void {
     let updatedCache = {
       nav: this.nav,
@@ -82,6 +89,7 @@ export class WordService {
     localStorage.setItem(`dictionary-cache`, JSON.stringify(updatedCache));
   }
 
+  // Controladora do estado do menu inicial
   changeTab(tab: number): void {
     this.nav = tab;
 
@@ -96,14 +104,23 @@ export class WordService {
     this.saveCache();
   }
 
+  // Escolher palavra aleatória
   get randomWord(): string {
     const index = Math.floor(Math.random() * wordList.length);
 
     return wordList[index];
   }
 
+  // Adicionar mais palavras à lista do menu inicial na rolagem infinita
   updateWordList(): void {
-    this.getMoreWords();
+    this.moreWords = [];
+
+    for (let i = 0; i < 120; i++) {
+      let newWord = this.randomWord;
+
+      // Conferir se a palavra escolhida não é repetida
+      if (this.words.indexOf(newWord) < 0) this.moreWords.push(newWord);
+    }
 
     this.words = [... this.words, ...this.moreWords];
     this.list = [...this.words];
@@ -111,29 +128,23 @@ export class WordService {
     this.saveCache();
   }
 
-  getMoreWords(amount = 120): void {
-    this.moreWords = [];
-
-    for (let i = 0; i < amount; i++) {
-      let newWord = this.randomWord;
-
-      if (this.words.indexOf(newWord) < 0) this.moreWords.push(newWord);
-    }
-  }
-
+  // Renovar a lista de palavras
   resetWordList(): void {
     this.words = [];
 
     this.updateWordList();
   }
 
+  // Consultar dados sobre a palavra na API
   getWord(word: string) {
     return this.http.get<Word[]>(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
   }
 
+  // Tratar dados vindos da API
   requestWord(request: string, pos?: number): void {
+    // Substituir palavra existente sem dados
     const start = pos ? pos : 0;
-    const count = pos ? 1: 0;
+    const count = pos ? 1 : 0;
 
     this.getWord(request)
       .subscribe({
@@ -145,7 +156,7 @@ export class WordService {
           this.saveCache();
         },
         error: fail => {
-          if (fail.status === 0) {
+          if (fail.status === 0) { // Erro de conexão
             this.failure = this.messageConnectFail;
 
             let notFound = {
@@ -154,7 +165,7 @@ export class WordService {
             }
 
             this.requested.unshift(notFound);
-          } else {
+          } else { // Palavra não encontrada
             this.failure = fail.error;
 
             let notFound = {
@@ -168,6 +179,7 @@ export class WordService {
       });
   }
 
+  // Carregar dados da palavra e salvar no histórico
   getWordDetails() {
     this.isLoading = true;
     this.word = null;
@@ -177,19 +189,19 @@ export class WordService {
 
     let historyIndex = this.history.indexOf(request);
 
-    if (historyIndex === -1) {
+    if (historyIndex === -1) { // Palavra nova
       this.history.unshift(request);
 
       this.requestWord(request);
     } else {
       let wordIndex = this.requested.findIndex(x => request === x.word);
 
-      if (this.requested[wordIndex]?.meanings) {
+      if (this.requested[wordIndex]?.meanings) { // Palavra salva no cache
         this.word = this.cache.requested[wordIndex];
       } else {
-        if (this.requested[wordIndex]?.connect) {
+        if (this.requested[wordIndex]?.connect) { // Palavra não encontrada na API
           this.failure = this.messageNotFound;
-        } else {
+        } else { // Palavra sem dados por erro de conexão
           this.requestWord(request, wordIndex);
         }
       }
@@ -203,6 +215,7 @@ export class WordService {
     this.isLoading = false;
   }
 
+  // Reproduzir áudio dos fonemas disponíveis
   playPhonetics(url?: string) {
     let audio = new Audio();
     if (url) audio.src = url;
@@ -211,6 +224,7 @@ export class WordService {
     audio.play();
   }
 
+  // Salvar palavra favorita
   saveFavorite(): void {
     let request = this.request as string;
 
@@ -221,6 +235,7 @@ export class WordService {
     this.favved = true;
   }
 
+  // Remover palavra favorita
   removeFavorite(): void {
     let request = this.request as string;
 
