@@ -50,6 +50,8 @@ export class WordComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    window.scrollTo(0, 1);
+    
     this.active = 0;
     this.selected = 0;
 
