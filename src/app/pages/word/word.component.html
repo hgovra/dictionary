@@ -1,14 +1,12 @@
-<h1 routerLink="/">
-    <fa-icon class="logo" [icon]="book"></fa-icon> Dictionary
-</h1>
+<article *ngIf="word" class="word">
+    <h1 routerLink="/">
+        <fa-icon class="logo" [icon]="book"></fa-icon> Dictionary
+    </h1>
 
-<article *ngIf="word">
     <h2>{{ word.word }}
-        <fa-icon class="fav off" [icon]="off" *ngIf="!favved"
-            (click)="saveFavorite()">
+        <fa-icon class="fav off" [icon]="off" *ngIf="!favved" (click)="saveFavorite()">
         </fa-icon>
-        <fa-icon class="fav on" [icon]="on" *ngIf="favved"
-            (click)="removeFavorite()">
+        <fa-icon class="fav on" [icon]="on" *ngIf="favved" (click)="removeFavorite()">
         </fa-icon>
     </h2>
 
@@ -26,8 +24,7 @@
             <div *ngFor="let meaning of word.meanings; let i = index" class="content"
                 [ngClass]="{'active': active === i}">
 
-                <fa-icon class="nav previous" [icon]="previous" *ngIf="selected > 0"
-                    (click)="selected = selected - 1">
+                <fa-icon class="nav previous" [icon]="previous" *ngIf="selected > 0" (click)="selected = selected - 1">
                 </fa-icon>
                 <fa-icon class="nav next" [icon]="next" *ngIf="selected < meaning.definitions.length - 1"
                     (click)="selected = selected + 1">
@@ -71,10 +68,17 @@
 
 </article>
 
-<article *ngIf="failure">
-    <h2>{{ failure.title }}</h2>
+<article *ngIf="failure" class="failure">
+    <h1 routerLink="/">
+        <fa-icon class="logo" [icon]="book"></fa-icon> Dictionary
+    </h1>
 
-    <p>{{ failure.message }}</p>
+    <div class="content">
+        <h3>{{ failure.title }} <fa-icon [icon]="sad"></fa-icon>
+        </h3>
 
-    <p>{{ failure.resolution }}</p>
+        <p class="message">{{ failure.message }}</p>
+
+        <p class="resolution">{{ failure.resolution }}</p>
+    </div>
 </article>

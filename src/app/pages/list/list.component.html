@@ -1,18 +1,21 @@
-<h1>
-    <fa-icon class="logo" [icon]="book"></fa-icon> Dictionary
-</h1>
-
 <main>
-    <nav>
-        <ul>
-            <li *ngFor="let tab of tabs; ; let i = index" [ngClass]="{'selected': nav === i}" (click)="changeTab(i)">
-                {{ tabs[i] }}
-            </li>
-        </ul>
-    </nav>
+    <h1 (click)="resetWordList()">
+        <fa-icon class="logo" [icon]="book"></fa-icon> Dictionary
+    </h1>
 
-    <div class="list" infiniteScroll #listContainer [infiniteScrollDistance]="1" [infiniteScrollThrottle]="150"
-        [infiniteScrollContainer]="listContainer" (scrolled)="onScroll()">
-        <stack [content]="list"></stack>
-    </div>
+    <section>
+        <nav>
+            <ul>
+                <li *ngFor="let tab of tabs; ; let i = index" [ngClass]="{'selected': nav === i}"
+                    (click)="changeTab(i)">
+                    {{ tabs[i] }}
+                </li>
+            </ul>
+        </nav>
+
+        <div class="list" infiniteScroll #listContainer [infiniteScrollDistance]="1" [infiniteScrollThrottle]="150"
+            [infiniteScrollContainer]="listContainer" (scrolled)="onScroll()">
+            <stack [content]="list"></stack>
+        </div>
+    </section>
 </main>

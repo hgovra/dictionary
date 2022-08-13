@@ -104,4 +104,10 @@ export class ListComponent implements OnInit {
   onScroll(): void {
     if (this.nav === 0) this.updateWordList();
   }
+
+  resetWordList():void {
+    this.words = [];
+
+    this.updateWordList();
+  }
 }

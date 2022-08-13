@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { faAngleLeft, faAngleRight, faBookBookmark, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faAngleRight, faBookBookmark, faSadTear, faStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as offStar } from '@fortawesome/free-regular-svg-icons';
 
 import { WordService } from 'src/app/services/word.service';
@@ -34,6 +34,7 @@ export class WordComponent implements OnInit {
   off = offStar;
   previous = faAngleLeft;
   next = faAngleRight;
+  sad = faSadTear;
 
   constructor(
     private route: ActivatedRoute,

@@ -9,7 +9,7 @@ h1 {
     margin: 0;
 }
 
-article {
+.word {
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -71,7 +71,6 @@ article {
                 display: none;
                 flex-direction: column;
                 transition: 200ms;
-                height: calc(100% - 60px);
                 overflow-y: auto;
 
                 &.active {
@@ -131,6 +130,41 @@ article {
                     }
                 }
             }
+        }
+    }
+}
+
+.failure {
+    @include text;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    h1 {
+        font-size: 36px;
+        margin: 20px 0;
+        padding: 0;
+    }
+
+    .content {
+        background: $block;
+        flex: 1;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        padding: 10px 50px 20px;
+
+        h3 {
+            @include text-bold;
+            font-size: 18px;
+        }
+
+        .resolution {
+            padding: 20px;
+            font-size: 16px;
+            line-height: 18px;
+            text-align: center;
+            background: $highlight;
+            border-radius: 20px;
+            margin-bottom: 0;
         }
     }
 }
