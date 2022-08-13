@@ -1,84 +1,87 @@
-<article *ngIf="word" class="word">
-    <h1 routerLink="/">
-        <fa-icon class="logo" [icon]="book"></fa-icon> Dictionary
-    </h1>
+<main>
+    <article *ngIf="word" class="word">
+        <h1 routerLink="/">
+            <fa-icon class="logo" [icon]="book"></fa-icon> Dictionary
+        </h1>
 
-    <h2>{{ word.word }}
-        <fa-icon class="fav off" [icon]="off" *ngIf="!favved" (click)="saveFavorite()">
-        </fa-icon>
-        <fa-icon class="fav on" [icon]="on" *ngIf="favved" (click)="removeFavorite()">
-        </fa-icon>
-    </h2>
+        <h2>{{ word.word }}
+            <fa-icon class="fav off" [icon]="off" *ngIf="!favved" (click)="saveFavorite()">
+            </fa-icon>
+            <fa-icon class="fav on" [icon]="on" *ngIf="favved" (click)="removeFavorite()">
+            </fa-icon>
+        </h2>
 
-    <banner *ngIf="word.phonetics" [cards]="word.phonetics"></banner>
+        <banner *ngIf="word.phonetics" [cards]="word.phonetics"></banner>
 
-    <div *ngIf="word.meanings" class="top-container">
-        <ul class="tabs">
-            <li *ngFor="let meaning of word.meanings; let i = index" [ngClass]="{'selected': active === i}"
-                (click)="active = i; selected = 0">
-                {{ meaning.partOfSpeech }}
-            </li>
-        </ul>
+        <div *ngIf="word.meanings" class="top-container">
+            <ul class="tabs">
+                <li *ngFor="let meaning of word.meanings; let i = index" [ngClass]="{'selected': active === i}"
+                    (click)="active = i; selected = 0">
+                    {{ meaning.partOfSpeech }}
+                </li>
+            </ul>
 
-        <div class="tab-content">
-            <div *ngFor="let meaning of word.meanings; let i = index" class="content"
-                [ngClass]="{'active': active === i}">
+            <div class="tab-content">
+                <div *ngFor="let meaning of word.meanings; let i = index" class="content"
+                    [ngClass]="{'active': active === i}">
 
-                <fa-icon class="nav previous" [icon]="previous" *ngIf="selected > 0" (click)="selected = selected - 1">
-                </fa-icon>
-                <fa-icon class="nav next" [icon]="next" *ngIf="selected < meaning.definitions.length - 1"
-                    (click)="selected = selected + 1">
-                </fa-icon>
+                    <fa-icon class="nav previous" [icon]="previous" *ngIf="selected > 0"
+                        (click)="selected = selected - 1">
+                    </fa-icon>
+                    <fa-icon class="nav next" [icon]="next" *ngIf="selected < meaning.definitions.length - 1"
+                        (click)="selected = selected + 1">
+                    </fa-icon>
 
-                <div class="container">
-                    <div *ngFor="let definition of meaning.definitions; let j = index" class="sub-content"
-                        [ngClass]="{'selected': selected === j}">
-                        <p>{{ definition.definition }}</p>
+                    <div class="container">
+                        <div *ngFor="let definition of meaning.definitions; let j = index" class="sub-content"
+                            [ngClass]="{'selected': selected === j}">
+                            <p>{{ definition.definition }}</p>
 
-                        <div *ngIf="definition.synonyms.length" class="related">
-                            <h4>Synonyms</h4>
+                            <div *ngIf="definition.synonyms.length" class="related">
+                                <h4>Synonyms</h4>
 
-                            <stack [content]="definition.synonyms"></stack>
+                                <stack [content]="definition.synonyms"></stack>
+                            </div>
+
+                            <div *ngIf="definition.antonyms.length" class="related">
+                                <h4>Antonyms</h4>
+
+                                <stack [content]="definition.antonyms"></stack>
+                            </div>
+
+                            <p class="example" *ngIf="definition.example">&ldquo;{{ definition.example }}&rdquo;</p>
                         </div>
-
-                        <div *ngIf="definition.antonyms.length" class="related">
-                            <h4>Antonyms</h4>
-
-                            <stack [content]="definition.antonyms"></stack>
-                        </div>
-
-                        <p class="example" *ngIf="definition.example">&ldquo;{{ definition.example }}&rdquo;</p>
                     </div>
-                </div>
 
-                <div *ngIf="meaning.synonyms.length" class="related">
-                    <h4>Synonyms</h4>
+                    <div *ngIf="meaning.synonyms.length" class="related">
+                        <h4>Synonyms</h4>
 
-                    <stack [content]="meaning.synonyms"></stack>
-                </div>
+                        <stack [content]="meaning.synonyms"></stack>
+                    </div>
 
-                <div *ngIf="meaning.antonyms.length" class="related">
-                    <h4>Antonyms</h4>
+                    <div *ngIf="meaning.antonyms.length" class="related">
+                        <h4>Antonyms</h4>
 
-                    <stack [content]="meaning.antonyms"></stack>
+                        <stack [content]="meaning.antonyms"></stack>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-</article>
+    </article>
 
-<article *ngIf="failure" class="failure">
-    <h1 routerLink="/">
-        <fa-icon class="logo" [icon]="book"></fa-icon> Dictionary
-    </h1>
+    <article *ngIf="failure" class="failure">
+        <h1 routerLink="/">
+            <fa-icon class="logo" [icon]="book"></fa-icon> Dictionary
+        </h1>
 
-    <div class="content">
-        <h3>{{ failure.title }} <fa-icon [icon]="sad"></fa-icon>
-        </h3>
+        <div class="content">
+            <h3>{{ failure.title }} <fa-icon [icon]="sad"></fa-icon>
+            </h3>
 
-        <p class="message">{{ failure.message }}</p>
+            <p class="message">{{ failure.message }}</p>
 
-        <p class="resolution">{{ failure.resolution }}</p>
-    </div>
-</article>
+            <p class="resolution">{{ failure.resolution }}</p>
+        </div>
+    </article>
+</main>

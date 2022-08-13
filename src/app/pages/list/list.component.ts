@@ -77,7 +77,7 @@ export class ListComponent implements OnInit {
     this.saveCache();
   }
 
-  getMoreWords(amount = 30): void {
+  getMoreWords(amount = 90): void {
     this.moreWords = [];
 
     for (let i = 0; i < amount; i++) {
