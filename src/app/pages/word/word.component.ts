@@ -36,10 +36,18 @@ export class WordComponent implements OnInit {
   next = faAngleRight;
   sad = faSadTear;
 
+  deviceHeight: any;
+  deviceWidth: any;
+
   constructor(
     private route: ActivatedRoute,
     private wordService: WordService
-  ) { }
+  ) {
+    this.deviceHeight = window.screen.height;
+    this.deviceWidth = window.screen.width;
+    console.log(this.deviceHeight);
+    console.log(this.deviceWidth)
+  }
 
   ngOnInit(): void {
     this.active = 0;
@@ -67,7 +75,7 @@ export class WordComponent implements OnInit {
       .subscribe(
         params => {
           this.request = params['word'];
-console.log(this.favorites)
+
           let indexFavved = this.favorites.indexOf(this.request as string);
 
           if (indexFavved !== -1) {
@@ -152,7 +160,6 @@ console.log(this.favorites)
       ...this.cache,
       favorites: this.favorites
     };
-    console.log(updatedCache)
 
     localStorage.setItem(`dictionary-cache`, JSON.stringify(updatedCache));
 
