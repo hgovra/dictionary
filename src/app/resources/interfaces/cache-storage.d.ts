@@ -1,4 +1,4 @@
-interface Cache {
+interface CacheStorage {
     nav: number;
     list: string[];
     history: string[];

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { faBookBookmark } from '@fortawesome/free-solid-svg-icons';
-import { WordService } from 'src/app/services/word.service';
 
 import wordList from 'word-list-json';
 
@@ -11,7 +10,7 @@ import wordList from 'word-list-json';
 })
 export class ListComponent implements OnInit {
 
-  cache = JSON.parse(localStorage.getItem('dictionary-cache') as string) as unknown as Cache;
+  cache = JSON.parse(localStorage.getItem('dictionary-cache') as string) as unknown as CacheStorage;
 
   list: string[] = [];
 
@@ -24,15 +23,13 @@ export class ListComponent implements OnInit {
   tabs = ['List', 'History', 'Favorites'];
 
   // Ícone da UI
-  book = faBookBookmark
+  book = faBookBookmark;
 
-  constructor(
-    private wordService: WordService
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
     if (!this.cache) {
-      const emptyCache = {
+      let emptyCache = {
         nav: 0,
         list: [],
         history: [],
@@ -40,16 +37,19 @@ export class ListComponent implements OnInit {
         requested: []
       }
 
+      this.cache = emptyCache as unknown as CacheStorage;
+
       localStorage.setItem(`dictionary-cache`, JSON.stringify(emptyCache));
     } else {
+      this.nav = this.cache.nav;
       this.words = this.cache.list;
       this.history = this.cache.history;
       this.favorites = this.cache.favorites;
-
-      this.list = this.words;
     }
 
     if (!this.words.length) this.updateWordList();
+
+    this.changeTab(this.nav);
   }
 
   saveCache(): void {
@@ -72,11 +72,12 @@ export class ListComponent implements OnInit {
     this.getMoreWords();
 
     this.words = [... this.words, ...this.moreWords];
+    this.list = [...this.words];
 
     this.saveCache();
   }
 
-  getMoreWords(amount = 60): void {
+  getMoreWords(amount = 30): void {
     this.moreWords = [];
 
     for (let i = 0; i < amount; i++) {
@@ -96,9 +97,11 @@ export class ListComponent implements OnInit {
     } else if (tab === 2) {
       this.list = this.favorites;
     }
+
+    this.saveCache();
   }
 
   onScroll(): void {
-    this.updateWordList();
+    if (this.nav === 0) this.updateWordList();
   }
 }

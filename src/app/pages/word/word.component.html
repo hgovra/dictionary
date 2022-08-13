@@ -1,5 +1,16 @@
+<h1 routerLink="/">
+    <fa-icon class="logo" [icon]="book"></fa-icon> Dictionary
+</h1>
+
 <article *ngIf="word">
-    <h2>{{ word.word }}</h2>
+    <h2>{{ word.word }}
+        <fa-icon class="fav off" [icon]="off" *ngIf="!favved"
+            (click)="saveFavorite()">
+        </fa-icon>
+        <fa-icon class="fav on" [icon]="on" *ngIf="favved"
+            (click)="removeFavorite()">
+        </fa-icon>
+    </h2>
 
     <banner *ngIf="word.phonetics" [cards]="word.phonetics"></banner>
 

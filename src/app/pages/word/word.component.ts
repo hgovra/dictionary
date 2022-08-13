@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faAngleRight, faBookBookmark, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar as offStar } from '@fortawesome/free-regular-svg-icons';
 
 import { WordService } from 'src/app/services/word.service';
 
@@ -11,7 +12,12 @@ import { WordService } from 'src/app/services/word.service';
 })
 export class WordComponent implements OnInit {
 
-  cache: Cache = JSON.parse(localStorage.getItem('dictionary-cache') as string) as unknown as Cache;
+  cache: CacheStorage = JSON.parse(localStorage.getItem('dictionary-cache') as string) as unknown as CacheStorage;
+
+  history: string[] = [];
+  favorites: string[] = [];
+  requested: Word[] = [];
+
   request: string | null = null;
 
   word: Word | null = null;
@@ -20,7 +26,12 @@ export class WordComponent implements OnInit {
   active = 0;
   selected = 0;
 
+  favved = false;
+
   // Ícones da UI
+  book = faBookBookmark;
+  on = faStar;
+  off = offStar;
   previous = faAngleLeft;
   next = faAngleRight;
 
@@ -42,13 +53,27 @@ export class WordComponent implements OnInit {
         requested: []
       }
 
+      this.cache = emptyCache as unknown as CacheStorage;
+
       localStorage.setItem(`dictionary-cache`, JSON.stringify(emptyCache));
+    } else {
+      this.history = this.cache.history;
+      this.favorites = this.cache.favorites;
+      this.requested = this.cache.requested;
     }
 
     this.route.params
       .subscribe(
         params => {
           this.request = params['word'];
+console.log(this.favorites)
+          let indexFavved = this.favorites.indexOf(this.request as string);
+
+          if (indexFavved !== -1) {
+            this.favved = true;
+          } else {
+            this.favved = false;
+          }
 
           this.getWordDetails();
         }
@@ -61,11 +86,29 @@ export class WordComponent implements OnInit {
 
     this.active = 0;
 
-    this.wordService.getWord(this.request as string)
+    let request = this.request as string;
+
+    let historyIndex = this.history.indexOf(request);
+
+    if (historyIndex === -1) {
+      this.history.unshift(request);
+    } else {
+      this.history.splice(historyIndex, 1);
+      this.history.unshift(request);
+    }
+
+    let updatedCache = {
+      ...this.cache,
+      history: this.history
+    }
+
+    localStorage.setItem(`dictionary-cache`, JSON.stringify(updatedCache));
+
+    this.wordService.getWord(request)
       .subscribe({
         next: res => {
           if (this.cache) {
-            let index = this.cache.requested.findIndex(x => x.word === this.request);
+            let index = this.cache.requested.findIndex(x => x.word === request);
 
             if (index > -1) {
               this.word = this.cache.requested[index];
@@ -76,12 +119,11 @@ export class WordComponent implements OnInit {
 
           this.word = res[0];
 
-          let updatedRequested = this.cache.requested;
-          updatedRequested.push(this.word);
+          this.requested.push(this.word);
 
           let updatedCache = {
             ...this.cache,
-            requested: updatedRequested
+            requested: this.requested
           }
 
           localStorage.setItem(`dictionary-cache`, JSON.stringify(updatedCache));
@@ -98,5 +140,38 @@ export class WordComponent implements OnInit {
 
     audio.load();
     audio.play();
+  }
+
+  saveFavorite(): void {
+    let request = this.request as string;
+
+    this.favorites.unshift(request);
+
+    let updatedCache = {
+      ...this.cache,
+      favorites: this.favorites
+    };
+    console.log(updatedCache)
+
+    localStorage.setItem(`dictionary-cache`, JSON.stringify(updatedCache));
+
+    this.favved = true;
+  }
+
+  removeFavorite(): void {
+    let request = this.request as string;
+
+    let favoriteIndex = this.favorites.indexOf(request);
+
+    this.favorites.splice(favoriteIndex, 1);
+
+    let updatedCache = {
+      ...this.cache,
+      favorites: this.favorites
+    }
+
+    localStorage.setItem(`dictionary-cache`, JSON.stringify(updatedCache));
+
+    this.favved = false;
   }
 }

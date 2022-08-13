@@ -9,7 +9,7 @@ export class StackComponent implements OnInit {
 
   @Input()
   content: string[] = [];
-  
+
   constructor() { }
 
   ngOnInit(): void {
