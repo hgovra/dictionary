@@ -26,7 +26,7 @@ export class WordService {
   tabs = ['List', 'History', 'Favorites'];
 
   messageConnectFail = {
-    title: 'No Internect connection',
+    title: 'No Internet Connection',
     message: 'We were unable to connect to the server.',
     resolution: 'Check your connection and try again.'
   };
@@ -131,19 +131,29 @@ export class WordService {
     return this.http.get<Word[]>(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
   }
 
-  requestWord(request: string): void {
+  requestWord(request: string, pos?: number): void {
+    const start = pos ? pos : 0;
+    const count = pos ? 1: 0;
+
     this.getWord(request)
       .subscribe({
         next: res => {
           this.word = res[0];
 
-          this.requested.push(this.word);
+          this.requested.splice(start, count, this.word);
 
           this.saveCache();
         },
         error: fail => {
           if (fail.status === 0) {
             this.failure = this.messageConnectFail;
+
+            let notFound = {
+              connect: false,
+              word: request
+            }
+
+            this.requested.unshift(notFound);
           } else {
             this.failure = fail.error;
 
@@ -152,7 +162,7 @@ export class WordService {
               word: request
             }
 
-            this.cache.requested.unshift(notFound);
+            this.requested.unshift(notFound);
           }
         }
       });
@@ -163,8 +173,6 @@ export class WordService {
     this.word = null;
     this.failure = null;
 
-    //this.active = 0;
-
     let request = this.request as string;
 
     let historyIndex = this.history.indexOf(request);
@@ -174,12 +182,16 @@ export class WordService {
 
       this.requestWord(request);
     } else {
-      let wordIndex = this.cache.requested.findIndex(x => request === x.word);
+      let wordIndex = this.requested.findIndex(x => request === x.word);
 
-      if (this.cache.requested[wordIndex]?.meanings) {
+      if (this.requested[wordIndex]?.meanings) {
         this.word = this.cache.requested[wordIndex];
       } else {
-        this.failure = this.messageNotFound;
+        if (this.requested[wordIndex]?.connect) {
+          this.failure = this.messageNotFound;
+        } else {
+          this.requestWord(request, wordIndex);
+        }
       }
 
       this.history.splice(historyIndex, 1);

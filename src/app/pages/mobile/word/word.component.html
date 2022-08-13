@@ -16,5 +16,5 @@
         <tabs *ngIf="wordService.word.meanings" [tabs]="wordService.word.meanings"></tabs>
     </article>
 
-    <failure *ngIf="wordService.failure"></failure>
+    <failure *ngIf="wordService.failure" [header]="true"></failure>
 </main>

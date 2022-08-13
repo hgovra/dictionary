@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { faSadTear } from '@fortawesome/free-solid-svg-icons';
+import { Component, Input, OnInit } from '@angular/core';
+import { faBookBookmark, faSadTear } from '@fortawesome/free-solid-svg-icons';
 import { WordService } from 'src/app/services/word.service';
 
 @Component({
@@ -9,7 +9,11 @@ import { WordService } from 'src/app/services/word.service';
 })
 export class FailureComponent implements OnInit {
 
+  @Input()
+  header = false;
+
   // Ícones da UI
+  book = faBookBookmark;
   sad = faSadTear;
 
   constructor(

@@ -1,4 +1,8 @@
 <article class="failure">
+    <h1 *ngIf="header">
+        <fa-icon class="logo" [icon]="book"></fa-icon> Dictionary
+    </h1>
+
     <div class="content">
         <h3>{{ wordService.failure?.title }} <fa-icon [icon]="sad"></fa-icon>
         </h3>

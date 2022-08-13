@@ -33,6 +33,13 @@ main {
             display: flex;
             overflow: auto;
             flex: 1;
+            min-height: 100px;
         }
+    }
+
+    failure {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
     }
 }

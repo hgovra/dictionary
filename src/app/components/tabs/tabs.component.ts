@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, } from '@angular/core';
 
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
@@ -7,7 +7,7 @@ import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.scss']
 })
-export class TabsComponent implements OnInit {
+export class TabsComponent implements OnInit, OnChanges {
 
   @Input()
   tabs: Meanings[] = [];
@@ -22,6 +22,11 @@ export class TabsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
+  ngOnChanges() {
+    this.active = 0;
+    this.selected = 0;
+  }
 }

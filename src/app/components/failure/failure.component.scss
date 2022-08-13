@@ -6,6 +6,14 @@
     flex-direction: column;
     height: 100%;
 
+    h1 {
+        text-align: center;
+        @include text-bold;
+        font-size: 36px;
+        color: $highlight;
+        margin: 20px 0;
+    }
+
     .content {
         background: darken($block, 3%);
         flex: 1;
@@ -14,7 +22,7 @@
 
         h3 {
             @include text-bold;
-            font-size: 24px;
+            font-size: 20px;
             text-align: center;
         }
 
