@@ -36,22 +36,20 @@ export class WordComponent implements OnInit {
   next = faAngleRight;
   sad = faSadTear;
 
-  deviceHeight: any;
-  deviceWidth: any;
+  //deviceHeight: any;
+  //deviceWidth: any;
 
   constructor(
     private route: ActivatedRoute,
     private wordService: WordService
   ) {
-    this.deviceHeight = window.screen.height;
+    /*this.deviceHeight = window.screen.height;
     this.deviceWidth = window.screen.width;
     console.log(this.deviceHeight);
-    console.log(this.deviceWidth)
+    console.log(this.deviceWidth)*/
   }
 
   ngOnInit(): void {
-    window.scrollTo(0, 1);
-    
     this.active = 0;
     this.selected = 0;
 

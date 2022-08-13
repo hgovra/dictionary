@@ -8,8 +8,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppComponent } from './app.component';
 
-import { ListComponent } from './pages/list/list.component';
-import { WordComponent } from './pages/word/word.component';
+// Páginas
+import { ListComponent } from './pages/mobile/list/list.component';
+import { WordComponent } from './pages/mobile/word/word.component';
+import { DesktopComponent } from './pages/desktop/desktop.component';
+
+// Componentes
 import { BannerComponent } from './components/banner/banner.component';
 import { StackComponent } from './components/stack/stack.component';
 
@@ -20,6 +24,7 @@ import { StackComponent } from './components/stack/stack.component';
     WordComponent,
     BannerComponent,
     StackComponent,
+    DesktopComponent,
   ],
   imports: [
     BrowserModule,
