@@ -12,16 +12,8 @@ const mobileRoutes: Routes = [
 ];
 
 const desktopRoutes: Routes = [
-  {
-    path: '',
-    component: DesktopComponent,
-    children: [
-      {
-        path: ':word',
-        component: DesktopComponent
-      }
-    ]
-  },
+  { path: '', component: DesktopComponent },
+  { path: ':word', component: DesktopComponent },
 ];
 
 @NgModule({

@@ -1,5 +1,5 @@
 <main>
-    <h1 (click)="resetWordList()">
+    <h1>
         <fa-icon class="logo" [icon]="book"></fa-icon> Dictionary
     </h1>
 
@@ -9,6 +9,9 @@
                 <li *ngFor="let tab of tabs; ; let i = index" [ngClass]="{'selected': nav === i}"
                     (click)="changeTab(i)">
                     {{ tabs[i] }}
+                    <ng-container *ngIf="i === 0">
+                        <fa-icon class="refresh" [icon]="refresh" (click)="resetWordList()"></fa-icon>
+                    </ng-container>
                 </li>
             </ul>
         </nav>

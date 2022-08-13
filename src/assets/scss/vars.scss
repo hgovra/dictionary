@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;800&display=swap');
 
-/* Variáveis de texto */
+// Texto
 
 @mixin text {
     font-family: 'Work Sans', sans-serif;
@@ -15,10 +15,26 @@
     letter-spacing: 0.1px;
 }
 
-/* Variáveis de cores */
+// Cores
+
 $highlight: #fff;
 $text: #222;
 $block: #f7f6f3;
 $nav: #666;
 $link: #ccc;
 $shadow: #999;
+
+// Animações
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 import { faAngleLeft, faAngleRight, faBookBookmark, faSadTear, faStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as offStar } from '@fortawesome/free-regular-svg-icons';
 
@@ -36,18 +37,11 @@ export class WordComponent implements OnInit {
   next = faAngleRight;
   sad = faSadTear;
 
-  //deviceHeight: any;
-  //deviceWidth: any;
-
   constructor(
     private route: ActivatedRoute,
-    private wordService: WordService
-  ) {
-    /*this.deviceHeight = window.screen.height;
-    this.deviceWidth = window.screen.width;
-    console.log(this.deviceHeight);
-    console.log(this.deviceWidth)*/
-  }
+    private wordService: WordService,
+    private titleService: Title
+  ) { }
 
   ngOnInit(): void {
     this.active = 0;
@@ -87,6 +81,12 @@ export class WordComponent implements OnInit {
           this.getWordDetails();
         }
       );
+
+    if (this.request) {
+      this.titleService.setTitle('Dictionary — ' + this.request as string);
+    } else {
+      this.titleService.setTitle('Dictionary');
+    }
   }
 
   getWordDetails() {

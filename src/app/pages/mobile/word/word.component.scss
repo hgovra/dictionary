@@ -53,6 +53,8 @@ main {
                 background: $shadow;
                 margin: 0;
                 @include text;
+                width: 100%;
+                overflow-x: auto;
 
                 > li {
                     padding: 20px;
@@ -70,7 +72,7 @@ main {
                 flex: 1;
                 display: flex;
                 flex-direction: column;
-                flex-basis: fit-content;
+                //flex-basis: fit-content;
                 background: $block;
                 margin-top: 10px;
                 overflow-y: auto;

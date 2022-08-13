@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faBookBookmark } from '@fortawesome/free-solid-svg-icons';
+import { faArrowsRotate, faBookBookmark } from '@fortawesome/free-solid-svg-icons';
 
 import wordList from 'word-list-json';
 
@@ -24,6 +24,7 @@ export class ListComponent implements OnInit {
 
   // Ícone da UI
   book = faBookBookmark;
+  refresh = faArrowsRotate;
 
   constructor() { }
 
