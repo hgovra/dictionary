@@ -1,24 +1,19 @@
 @import "../../../../assets/scss/vars";
 
 main {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-
-    h1 {
-        text-align: center;
-        @include text-bold;
-        font-size: 18px;
-        color: $highlight;
-        padding: 20px 0;
-        margin: 0;
-    }
-
     .word {
         display: flex;
         flex-direction: column;
-        flex: 1;
-        height: 100%;
+        height: 100vh;
+
+        h1 {
+            text-align: center;
+            @include text-bold;
+            font-size: 18px;
+            color: $highlight;
+            padding: 20px 0;
+            margin: 0;
+        }
 
         h2 {
             @include text-bold;
@@ -33,147 +28,11 @@ main {
             }
         }
 
-        .top-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            overflow-y: auto;
-            position: relative;
+        tabs {
             margin-top: 20px;
-            background: $block;
-
-            .tabs {
-                list-style: none;
-                display: flex;
-                flex-direction: row;
-                gap: 5px;
-                padding: 0;
-                background: $shadow;
-                margin: 0;
-                @include text;
-                width: 100%;
-                overflow-x: auto;
-
-                > li {
-                    padding: 20px;
-                    background: $link;
-                    font-size: 20px;
-
-                    &.selected {
-                        background: $block;
-                    }
-                }
-            }
-
-            .tab-content {
-                @include text;
-                flex: 1;
-                display: flex;
-                flex-direction: column;
-                //flex-basis: fit-content;
-                background: $block;
-                margin-top: 10px;
-                overflow-y: auto;
-
-                .content {
-                    display: none;
-                    overflow: visible;
-
-                    &.active {
-                        display: block;
-                    }
-
-                    .nav {
-                        position: absolute;
-                        width: 40px;
-                        height: 40px;
-                        top: 100px;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        font-size: 28px;
-                        z-index: 999;
-                        background: $nav;
-                        color: $highlight;
-
-                        &.previous {
-                            left: 0;
-                            border-radius: 0 10px 10px 0;
-                        }
-                        &.next {
-                            right: 0;
-                            border-radius: 10px 0 0 10px;
-                        }
-                    }
-
-                    .container {
-                        padding: 0 50px 20px;
-                    }
-
-                    .sub-content {
-                        display: none;
-
-                        &.selected {
-                            display: block;
-                        }
-
-                        .example {
-                            padding: 20px;
-                            font-size: 18px;
-                            line-height: 20px;
-                            text-align: center;
-                            background: $highlight;
-                            border-radius: 20px;
-                            margin-bottom: 0;
-                        }
-                    }
-
-                    .related {
-                        h4 {
-                            margin: 0 0 10px;
-                            font-size: 16px;
-                            text-align: center;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    .failure {
-        @include text;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-
-        h1 {
-            font-size: 36px;
-            margin: 20px 0;
-            padding: 0;
-        }
-
-        .content {
-            background: $block;
+            display: flex;
+            overflow: auto;
             flex: 1;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            padding: 10px 50px 20px;
-
-            h3 {
-                @include text-bold;
-                font-size: 18px;
-            }
-
-            .resolution {
-                padding: 20px;
-                font-size: 16px;
-                line-height: 18px;
-                text-align: center;
-                background: $highlight;
-                border-radius: 20px;
-                margin-bottom: 0;
-            }
         }
     }
 }

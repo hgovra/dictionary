@@ -4,6 +4,7 @@ main {
     height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 
     h1 {
         text-align: center;
@@ -16,43 +17,6 @@ main {
     section {
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         flex: 1;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-
-        nav {
-            ul {
-                list-style: none;
-                display: flex;
-                flex-direction: row;
-                gap: 5px;
-                padding: 0;
-                margin: 0;
-                background: $shadow;
-                margin: 0;
-                @include text;
-
-                > li {
-                    padding: 20px;
-                    background: $link;
-                    font-size: 20px;
-                    flex: 1;
-                    justify-content: center;
-                    align-items: center;
-                    text-align: center;
-
-                    &.selected {
-                        background: $block;
-                    }
-                }
-            }
-        }
-
-        .list {
-            padding: 0 30px;
-            background: $block;
-            overflow-y: auto;
-            flex: 1;
-        }
+        overflow: auto;
     }
 }

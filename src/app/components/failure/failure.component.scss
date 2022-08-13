@@ -1,0 +1,31 @@
+@import "../../../assets/scss/vars";
+
+.failure {
+    @include text;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .content {
+        background: darken($block, 3%);
+        flex: 1;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        padding: 10px 50px 20px;
+
+        h3 {
+            @include text-bold;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .resolution {
+            padding: 20px;
+            font-size: 16px;
+            line-height: 18px;
+            text-align: center;
+            background: $highlight;
+            border-radius: 20px;
+            margin-bottom: 0;
+        }
+    }
+}

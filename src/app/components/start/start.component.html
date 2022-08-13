@@ -1,0 +1,16 @@
+<nav>
+    <ul>
+        <li *ngFor="let tab of wordService.tabs; ; let i = index" [ngClass]="{'selected': wordService.nav === i}"
+            (click)="wordService.changeTab(i)">
+            {{ wordService.tabs[i] }}
+            <ng-container *ngIf="i === 0">
+                <fa-icon class="refresh" [icon]="refresh" (click)="wordService.resetWordList()"></fa-icon>
+            </ng-container>
+        </li>
+    </ul>
+</nav>
+
+<div class="list" infiniteScroll #listContainer [infiniteScrollDistance]="1" [infiniteScrollThrottle]="150"
+    [infiniteScrollContainer]="listContainer" (scrolled)="onScroll()">
+    <stack [content]="wordService.list"></stack>
+</div>

@@ -16,6 +16,9 @@ import { DesktopComponent } from './pages/desktop/desktop.component';
 // Componentes
 import { BannerComponent } from './components/banner/banner.component';
 import { StackComponent } from './components/stack/stack.component';
+import { StartComponent } from './components/start/start.component';
+import { TabsComponent } from './components/tabs/tabs.component';
+import { FailureComponent } from './components/failure/failure.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,9 @@ import { StackComponent } from './components/stack/stack.component';
     BannerComponent,
     StackComponent,
     DesktopComponent,
+    StartComponent,
+    TabsComponent,
+    FailureComponent,
   ],
   imports: [
     BrowserModule,

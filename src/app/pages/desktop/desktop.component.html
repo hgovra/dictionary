@@ -5,102 +5,26 @@
 
     <main>
         <section class="start">
-            <nav>
-                <ul>
-                    <li *ngFor="let tab of tabs; ; let i = index" [ngClass]="{'selected': nav === i}"
-                        (click)="changeTab(i)">
-                        {{ tabs[i] }}
-                        <ng-container *ngIf="i === 0">
-                            <fa-icon class="refresh" [icon]="refresh" (click)="resetWordList()"></fa-icon>
-                        </ng-container>
-                    </li>
-                </ul>
-            </nav>
-
-            <div class="list" infiniteScroll #listContainer [infiniteScrollDistance]="1" [infiniteScrollThrottle]="150"
-                [infiniteScrollContainer]="listContainer" (scrolled)="onScroll()">
-                <stack [content]="list"></stack>
-            </div>
+            <start></start>
         </section>
 
         <section class="info">
-            <article *ngIf="word" class="word">
-                <h2>{{ word.word }}
-                    <fa-icon class="fav off" [icon]="off" *ngIf="!favved" (click)="saveFavorite()">
-                    </fa-icon>
-                    <fa-icon class="fav on" [icon]="on" *ngIf="favved" (click)="removeFavorite()">
-                    </fa-icon>
-                </h2>
+            <ng-container *ngIf="!wordService.isLoading">
+                <article *ngIf="wordService.word" class="word">
+                    <h2>{{ wordService.word.word }}
+                        <fa-icon class="fav off" [icon]="off" *ngIf="!wordService.favved" (click)="wordService.saveFavorite()">
+                        </fa-icon>
+                        <fa-icon class="fav on" [icon]="on" *ngIf="wordService.favved" (click)="wordService.removeFavorite()">
+                        </fa-icon>
+                    </h2>
 
-                <banner *ngIf="word.phonetics" [cards]="word.phonetics"></banner>
+                    <banner *ngIf="wordService.word.phonetics" [cards]="wordService.word.phonetics"></banner>
 
-                <div *ngIf="word.meanings" class="top-container">
-                    <ul class="tabs">
-                        <li *ngFor="let meaning of word.meanings; let i = index" [ngClass]="{'selected': active === i}"
-                            (click)="active = i; selected = 0">
-                            {{ meaning.partOfSpeech }}
-                        </li>
-                    </ul>
+                    <tabs *ngIf="wordService.word.meanings" [tabs]="wordService.word.meanings"></tabs>
+                </article>
 
-                    <div class="tab-content">
-                        <div *ngFor="let meaning of word.meanings; let i = index" class="content"
-                            [ngClass]="{'active': active === i}">
-
-                            <fa-icon class="nav previous" [icon]="previous" *ngIf="selected > 0"
-                                (click)="selected = selected - 1">
-                            </fa-icon>
-                            <fa-icon class="nav next" [icon]="next" *ngIf="selected < meaning.definitions.length - 1"
-                                (click)="selected = selected + 1">
-                            </fa-icon>
-
-                            <div class="container">
-                                <div *ngFor="let definition of meaning.definitions; let j = index" class="sub-content"
-                                    [ngClass]="{'selected': selected === j}">
-                                    <p>{{ definition.definition }}</p>
-
-                                    <div *ngIf="definition.synonyms.length" class="related">
-                                        <h4>Synonyms</h4>
-
-                                        <stack [content]="definition.synonyms"></stack>
-                                    </div>
-
-                                    <div *ngIf="definition.antonyms.length" class="related">
-                                        <h4>Antonyms</h4>
-
-                                        <stack [content]="definition.antonyms"></stack>
-                                    </div>
-
-                                    <p class="example" *ngIf="definition.example">&ldquo;{{ definition.example }}&rdquo;
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div *ngIf="meaning.synonyms.length" class="related">
-                                <h4>Synonyms</h4>
-
-                                <stack [content]="meaning.synonyms"></stack>
-                            </div>
-
-                            <div *ngIf="meaning.antonyms.length" class="related">
-                                <h4>Antonyms</h4>
-
-                                <stack [content]="meaning.antonyms"></stack>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <article *ngIf="failure" class="failure">
-                <div class="content">
-                    <h3>{{ failure.title }} <fa-icon [icon]="sad"></fa-icon>
-                    </h3>
-
-                    <p class="message">{{ failure.message }}</p>
-
-                    <p class="resolution">{{ failure.resolution }}</p>
-                </div>
-            </article>
+                <failure *ngIf="wordService.failure"></failure>
+            </ng-container>
         </section>
     </main>
 </div>

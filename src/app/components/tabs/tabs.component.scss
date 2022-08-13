@@ -1,0 +1,113 @@
+@import "../../../assets/scss/vars";
+
+.top-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+    background: darken($block, 3%);
+
+    .tabs {
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        gap: 2px;
+        padding: 0;
+        background: $shadow;
+        margin: 0;
+        width: 100%;
+        overflow: visible;
+
+        > li {
+            padding: 10px;
+            background: $link;
+            @include text;
+            font-size: 18px;
+            cursor: pointer;
+            height: 42px;
+
+            &:hover {
+                background: lighten($link, 8%);
+            }
+
+            &.selected,
+            &.selected:hover {
+                background: darken($block, 3%);
+                cursor: default;
+            }
+        }
+    }
+
+    .tab-content {
+        @include text;
+        background: darken($block, 3%);
+        padding: 10px 50px;
+        overflow-y: auto;
+
+        .content {
+            display: none;
+            overflow-y: auto;
+            flex: 1;
+            max-height: max-content;
+
+            &.active {
+                display: block;
+            }
+
+            .nav {
+                position: absolute;
+                width: 40px;
+                height: 40px;
+                top: 100px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 28px;
+                z-index: 999;
+                background: $nav;
+                color: $highlight;
+                cursor: pointer;
+
+                &:hover {
+                    background: $text;
+                }
+
+                &.previous {
+                    left: 0;
+                    border-radius: 0 10px 10px 0;
+                }
+                &.next {
+                    right: 0;
+                    border-radius: 10px 0 0 10px;
+                }
+            }
+
+            .sub-content {
+                display: none;
+
+                &.selected {
+                    display: block;
+                }
+
+                .example {
+                    padding: 20px;
+                    font-size: 18px;
+                    line-height: 20px;
+                    text-align: center;
+                    background: $highlight;
+                    border-radius: 20px;
+                    margin-bottom: 0;
+                }
+            }
+
+            .related {
+                h4 {
+                    margin: 0 0 10px;
+                    font-size: 16px;
+                    text-align: center;
+                }
+            }
+        }
+    }
+}

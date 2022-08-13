@@ -1,0 +1,51 @@
+@import "../../../assets/scss/vars";
+
+nav {
+    ul {
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        gap: 2px;
+        padding: 0;
+        margin: 0;
+        background: $shadow;
+        margin: 0;
+        @include text;
+
+        > li {
+            padding: 20px;
+            background: $link;
+            font-size: 20px;
+            flex: 1;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+
+            &:hover {
+                background: lighten($link, 8%);
+            }
+
+            &.selected,
+            &.selected:hover {
+                background: darken($block, 3%);
+                cursor: default;
+            }
+
+            .refresh {
+                cursor: pointer;
+
+                &:hover {
+                    color: $shadow;
+                }
+            }
+        }
+    }
+}
+
+.list {
+    padding: 0 30px;
+    background: darken($block, 3%);
+    overflow-y: auto;
+    height: 100%;
+}

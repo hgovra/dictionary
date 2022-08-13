@@ -13,173 +13,40 @@ import { WordService } from 'src/app/services/word.service';
 })
 export class WordComponent implements OnInit {
 
-  cache: CacheStorage = JSON.parse(localStorage.getItem('dictionary-cache') as string) as unknown as CacheStorage;
-
-  history: string[] = [];
-  favorites: string[] = [];
-  requested: Word[] = [];
-
-  request: string | null = null;
-
-  word: Word | null = null;
-  failure: Fail | null = null;
-
-  active = 0;
-  selected = 0;
-
-  favved = false;
-
   // Ícones da UI
   book = faBookBookmark;
   on = faStar;
   off = offStar;
-  previous = faAngleLeft;
-  next = faAngleRight;
-  sad = faSadTear;
 
   constructor(
     private route: ActivatedRoute,
-    private wordService: WordService,
+    public wordService: WordService,
     private titleService: Title
   ) { }
 
   ngOnInit(): void {
-    this.active = 0;
-    this.selected = 0;
-
-    if (!this.cache) {
-      let emptyCache = {
-        nav: 0,
-        list: [],
-        history: [],
-        favorites: [],
-        requested: []
-      }
-
-      this.cache = emptyCache as unknown as CacheStorage;
-
-      localStorage.setItem(`dictionary-cache`, JSON.stringify(emptyCache));
-    } else {
-      this.history = this.cache.history;
-      this.favorites = this.cache.favorites;
-      this.requested = this.cache.requested;
-    }
-
     this.route.params
       .subscribe(
         params => {
-          this.request = params['word'];
+          let request = params['word'] as string;
+          this.wordService.request = request;
 
-          let indexFavved = this.favorites.indexOf(this.request as string);
+          let indexFavved = this.wordService.favorites.indexOf(request);
 
           if (indexFavved !== -1) {
-            this.favved = true;
+            this.wordService.favved = true;
           } else {
-            this.favved = false;
+            this.wordService.favved = false;
           }
 
-          this.getWordDetails();
+          if (this.wordService.request) this.wordService.getWordDetails();
+
+          if (this.wordService.request) {
+            this.titleService.setTitle('Dictionary — ' + request);
+          } else {
+            this.titleService.setTitle('Dictionary');
+          }
         }
       );
-
-    if (this.request) {
-      this.titleService.setTitle('Dictionary — ' + this.request as string);
-    } else {
-      this.titleService.setTitle('Dictionary');
-    }
-  }
-
-  getWordDetails() {
-    this.word = null;
-    this.failure = null;
-
-    this.active = 0;
-
-    let request = this.request as string;
-
-    let historyIndex = this.history.indexOf(request);
-
-    if (historyIndex === -1) {
-      this.history.unshift(request);
-    } else {
-      this.history.splice(historyIndex, 1);
-      this.history.unshift(request);
-    }
-
-    let updatedCache = {
-      ...this.cache,
-      history: this.history
-    }
-
-    localStorage.setItem(`dictionary-cache`, JSON.stringify(updatedCache));
-
-    this.wordService.getWord(request)
-      .subscribe({
-        next: res => {
-          if (this.cache) {
-            let index = this.cache.requested.findIndex(x => x.word === request);
-
-            if (index > -1) {
-              this.word = this.cache.requested[index];
-
-              return;
-            }
-          }
-
-          this.word = res[0];
-
-          this.requested.push(this.word);
-
-          let updatedCache = {
-            ...this.cache,
-            requested: this.requested
-          }
-
-          localStorage.setItem(`dictionary-cache`, JSON.stringify(updatedCache));
-        },
-        error: fail => {
-          this.failure = fail.error;
-        }
-      });
-  }
-
-  playPhonetics(url?: string) {
-    let audio = new Audio();
-    if (url) audio.src = url;
-
-    audio.load();
-    audio.play();
-  }
-
-  saveFavorite(): void {
-    let request = this.request as string;
-
-    this.favorites.unshift(request);
-
-    let updatedCache = {
-      ...this.cache,
-      favorites: this.favorites
-    };
-
-    localStorage.setItem(`dictionary-cache`, JSON.stringify(updatedCache));
-
-    this.favved = true;
-  }
-
-  removeFavorite(): void {
-    let request = this.request as string;
-
-    let favoriteIndex = this.favorites.indexOf(request);
-
-    this.favorites.splice(favoriteIndex, 1);
-
-    let updatedCache = {
-      ...this.cache,
-      favorites: this.favorites
-    }
-
-    localStorage.setItem(`dictionary-cache`, JSON.stringify(updatedCache));
-
-    this.favved = false;
   }
 }
