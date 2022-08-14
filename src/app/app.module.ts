@@ -19,6 +19,8 @@ import { StartComponent } from './components/start/start.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { FailureComponent } from './components/failure/failure.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,13 @@ import { LoadingComponent } from './components/loading/loading.component';
     HttpClientModule,
     AppRoutingModule,
     InfiniteScrollModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,17 @@
+{
+  "name": "Dictionary",
+  "short_name": "dictionary",
+  "theme_color": "#999999",
+  "background_color": "#666666",
+  "display": "standalone",
+  "scope": "./",
+  "start_url": "./",
+  "icons": [
+    {
+      "src": "assets/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg",
+      "purpose": "maskable any"
+    }
+  ]
+}

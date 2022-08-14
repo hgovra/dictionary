@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { BannerComponent } from './banner.component';
 
@@ -8,6 +9,9 @@ describe('BannerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [
+        FontAwesomeModule,
+      ],
       declarations: [ BannerComponent ]
     })
     .compileComponents();

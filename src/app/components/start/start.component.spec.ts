@@ -1,4 +1,12 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { InfiniteScrollDirective, InfiniteScrollModule, NgxInfiniteScrollService } from 'ngx-infinite-scroll';
+import { mobileRoutes, desktopRoutes } from 'src/app/app-routing.module';
+import { WordService } from 'src/app/services/word.service';
+import { StackComponent } from '../stack/stack.component';
 
 import { StartComponent } from './start.component';
 
@@ -8,7 +16,20 @@ describe('StartComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StartComponent ]
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        RouterTestingModule.withRoutes(mobileRoutes),
+        RouterTestingModule.withRoutes(desktopRoutes),
+        FontAwesomeModule,
+        InfiniteScrollModule,
+      ],
+      declarations: [        
+        StackComponent,
+      ],
+      providers: [
+        WordService,
+      ],
     })
     .compileComponents();
 
@@ -19,5 +40,16 @@ describe('StartComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+
+    const list = fixture.debugElement.query(By.css('.list'));
+
+    list.triggerEventHandler('scroll', null);
+
+    fixture.detectChanges();
+
+    fixture.whenStable().then(() => {
+      //const message = fixture.debugElement.query(By.css('p'));
+      //expect(message.styles.color).toEqual('blue');
+    });
   });
 });

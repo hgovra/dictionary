@@ -8,12 +8,12 @@ import { WordComponent } from './pages/mobile/word/word.component';
 import { DesktopComponent } from './pages/desktop/desktop.component';
 
 // Responsividade
-const mobileRoutes: Routes = [
+export const mobileRoutes: Routes = [
   { path: '', component: ListComponent },
   { path: ':word', component: WordComponent },
 ];
 
-const desktopRoutes: Routes = [
+export const desktopRoutes: Routes = [
   { path: '', component: DesktopComponent },
   { path: ':word', component: DesktopComponent },
 ];

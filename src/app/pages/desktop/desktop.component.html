@@ -9,7 +9,7 @@
         </section>
 
         <section class="info">
-            <loading *ngIf="wordService.isLoading"></loading>
+            <loading *ngIf="wordService.request && wordService.isLoading"></loading>
 
             <ng-container *ngIf="!wordService.isLoading">
                 <article *ngIf="wordService.word" class="word">
