@@ -6,6 +6,8 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ScreenService {
 
+  width: BehaviorSubject<number> = new BehaviorSubject<number>(window.innerWidth);
+
   constructor(
     ngZone: NgZone
   ) {
@@ -16,6 +18,4 @@ export class ScreenService {
       });
     };
   }
-
-  width: BehaviorSubject<number> = new BehaviorSubject<number>(window.innerWidth);
 }

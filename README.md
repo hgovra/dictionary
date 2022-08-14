@@ -22,6 +22,7 @@ http-server -p 8080 -c-1 dist/dictionary
 
 - Carrega palavras aleatórias infinitamente ao rolar a lista na página inicial.
 - Permite consultar uma palavra diretamente pela URL acrescentando-a logo após o endereço da raiz do site.
+- Player disponível para escutar os fonemas, quando disponíveis.
 - Sinônimos e antônimos também funcionam como links de consulta.  
 - Armazena informações das palavras consultadas previamente em cache local.
 - Armazena histórico e favoritos em cache local.
