@@ -156,7 +156,7 @@ export class WordService {
           this.isLoading = false;
         },
         error: fail => {
-          if (fail.status === 0) { // Erro de conexão
+          if (fail.status === 0 || fail.status === 504) { // Erro de conexão
             this.failure = this.messageConnectFail;
 
             let notFound = {
