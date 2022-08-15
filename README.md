@@ -6,6 +6,8 @@ Realizado como teste de Desenvolvimento Front-End para Coodesh.
 
 >  This is a challenge by [Coodesh](https://coodesh.com/)
 
+[Apresentação em vídeo](https://www.loom.com/share/c2e112fc6cb8476fae382192b2330b88)
+
 Pode ser visualizado rapidamente no endereço: [https://dazzling-davinci.netlify.app/](https://dazzling-davinci.netlify.app/)
 
 Para rodar localmente, baixe o repositório e execute os seguintes comandos (será necessário instalar o http-server):
