@@ -200,18 +200,20 @@ export class WordService {
 
       if (this.requested[wordIndex]?.meanings) { // Palavra salva no cache
         this.word = this.cache.requested[wordIndex];
+
+        this.isLoading = false;
       } else {
         if (this.requested[wordIndex]?.connect) { // Palavra não encontrada na API
           this.failure = this.messageNotFound;
         } else { // Palavra sem dados por erro de conexão
           this.requestWord(request, wordIndex);
         }
+
+        this.isLoading = false;
       }
 
       this.history.splice(historyIndex, 1);
       this.history.unshift(request);
-
-      this.isLoading = false;
     }
 
     this.saveCache();
