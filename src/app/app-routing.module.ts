@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Router, RouterModule, Routes } from '@angular/router';
+import { debounceTime, distinctUntilChanged } from "rxjs";
 
 import { ScreenService } from './services/screen.service';
 
@@ -19,7 +20,10 @@ export const desktopRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(mobileRoutes)],
+  imports: [
+    RouterModule.forRoot(mobileRoutes),
+    RouterModule.forRoot(desktopRoutes)
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
@@ -30,14 +34,14 @@ export class AppRoutingModule {
     screenService: ScreenService
   ) {
     // Escolher componente com base na largura da tela
-    screenService.width.subscribe(width => {
+    screenService.width.pipe(distinctUntilChanged(), debounceTime(50)).subscribe(width => {
       if (width < this.MOBILE_WIDTH) {
         router.resetConfig(mobileRoutes);
       } else {
         router.resetConfig(desktopRoutes);
       }
 
-      router.navigate([]);
+      router.navigate([router.url]);
     });
   }
 }

@@ -192,9 +192,9 @@ export class WordService {
     let historyIndex = this.history.indexOf(request);
 
     if (historyIndex === -1) { // Palavra nova
-      this.history.unshift(request);
-
       this.requestWord(request);
+
+      this.history.unshift(request);
     } else {
       let wordIndex = this.requested.findIndex(x => request === x.word);
 
