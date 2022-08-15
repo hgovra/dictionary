@@ -33,11 +33,11 @@ export class AppRoutingModule {
     screenService.width.subscribe(width => {
       if (width < this.MOBILE_WIDTH) {
         router.resetConfig(mobileRoutes);
-        router.navigate([]);
       } else {
         router.resetConfig(desktopRoutes);
-        router.navigate([]);
       }
+
+      router.navigate([]);
     });
   }
 }
