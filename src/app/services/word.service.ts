@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+import { environment } from 'src/environments/environment';
 import wordList from 'word-list-json';
 
 @Injectable({
@@ -137,7 +138,7 @@ export class WordService {
 
   // Consultar dados sobre a palavra na API
   getWord(word: string) {
-    return this.http.get<Word[]>(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+    return this.http.get<Word[]>(`${environment.WORD_API_URL}${word}`);
   }
 
   // Tratar dados vindos da API
