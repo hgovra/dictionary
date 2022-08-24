@@ -47,5 +47,6 @@ ng test
 - word-list-json
 - karma-jasmine
 - dotenv-webpack
+- @angular-builders/custom-webpack
 
 NodeJS versão 16.13.0
