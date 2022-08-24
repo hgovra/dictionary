@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { environment } from 'src/environments/environment.local';
+//import * as process from 'process';
+//import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+//dotenv.config()
+//import express from 'express'
+
 import wordList from 'word-list-json';
 
 @Injectable({
@@ -10,6 +14,9 @@ import wordList from 'word-list-json';
 export class WordService {
 
   isLoading = true;
+
+  // Dados da API
+  api: string = process.env['WORD_API_URL'] as string;
 
   // Dados off-line
   cache: CacheStorage = JSON.parse(localStorage.getItem('dictionary-cache') as string) as unknown as CacheStorage;
@@ -138,7 +145,7 @@ export class WordService {
 
   // Consultar dados sobre a palavra na API
   getWord(word: string) {
-    return this.http.get<Word[]>(`${environment.WORD_API_URL}${word}`);
+    return this.http.get<Word[]>(`${this.api}${word}`);
   }
 
   // Tratar dados vindos da API

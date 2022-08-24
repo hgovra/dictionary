@@ -46,5 +46,6 @@ ng test
 - ngx-infinite-scroll
 - word-list-json
 - karma-jasmine
+- dotenv-webpack
 
 NodeJS versão 16.13.0
