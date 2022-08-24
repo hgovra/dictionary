@@ -1,11 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-//import * as process from 'process';
-//import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
-//dotenv.config()
-//import express from 'express'
-
 import wordList from 'word-list-json';
 
 @Injectable({
