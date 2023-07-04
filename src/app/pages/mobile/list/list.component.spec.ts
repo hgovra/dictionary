@@ -15,8 +15,7 @@ describe('ListComponent', () => {
         HttpClientTestingModule,
         FontAwesomeModule,
       ],
-      declarations: [ 
-        ListComponent,
+      declarations: [
         StartComponent
       ]
     })

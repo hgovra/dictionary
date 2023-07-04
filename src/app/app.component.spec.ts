@@ -9,7 +9,8 @@ describe('AppComponent', () => {
         RouterTestingModule
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+
       ],
     }).compileComponents();
   });

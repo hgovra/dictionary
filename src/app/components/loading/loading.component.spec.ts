@@ -12,14 +12,9 @@ describe('LoadingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LoadingComponent ],
-      imports: [
-        HttpClientModule,
-        HttpClientTestingModule,
-        FontAwesomeModule
-      ],
-    })
-    .compileComponents();
+      declarations: [LoadingComponent],
+      imports: [HttpClientModule, HttpClientTestingModule, FontAwesomeModule],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(LoadingComponent);
     component = fixture.componentInstance;

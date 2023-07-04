@@ -3,11 +3,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { InfiniteScrollDirective, InfiniteScrollModule, NgxInfiniteScrollService } from 'ngx-infinite-scroll';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { mobileRoutes, desktopRoutes } from 'src/app/app-routing.module';
 import { WordService } from 'src/app/services/word.service';
 import { StackComponent } from '../stack/stack.component';
-
 import { StartComponent } from './start.component';
 
 describe('StartComponent', () => {
@@ -24,14 +23,9 @@ describe('StartComponent', () => {
         FontAwesomeModule,
         InfiniteScrollModule,
       ],
-      declarations: [        
-        StackComponent,
-      ],
-      providers: [
-        WordService,
-      ],
-    })
-    .compileComponents();
+      declarations: [StackComponent, StartComponent],
+      providers: [WordService],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(StartComponent);
     component = fixture.componentInstance;

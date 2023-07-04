@@ -8,11 +8,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppComponent } from './app.component';
 
 // Páginas
+
 import { ListComponent } from './pages/mobile/list/list.component';
 import { WordComponent } from './pages/mobile/word/word.component';
 import { DesktopComponent } from './pages/desktop/desktop.component';
 
 // Componentes
+
 import { BannerComponent } from './components/banner/banner.component';
 import { StackComponent } from './components/stack/stack.component';
 import { StartComponent } from './components/start/start.component';
@@ -25,15 +27,15 @@ import { environment } from '../environments/environment';
 @NgModule({
   declarations: [
     AppComponent,
-    ListComponent,
-    WordComponent,
     BannerComponent,
     StackComponent,
-    DesktopComponent,
     StartComponent,
     TabsComponent,
     FailureComponent,
     LoadingComponent,
+    ListComponent,
+    WordComponent,
+    DesktopComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,10 +47,10 @@ import { environment } from '../environments/environment';
       enabled: environment.production,
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    })
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

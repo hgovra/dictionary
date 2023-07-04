@@ -5,7 +5,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { mobileRoutes, desktopRoutes } from 'src/app/app-routing.module';
 import { LoadingComponent } from 'src/app/components/loading/loading.component';
 import { WordService } from 'src/app/services/word.service';
-
 import { WordComponent } from './word.component';
 
 describe('WordComponent', () => {
@@ -21,14 +20,9 @@ describe('WordComponent', () => {
         RouterTestingModule.withRoutes(desktopRoutes),
         FontAwesomeModule,
       ],
-      declarations: [
-        LoadingComponent
-      ],
-      providers: [
-        WordService
-      ],
-    })
-    .compileComponents();
+      declarations: [LoadingComponent, WordComponent],
+      providers: [WordService],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(WordComponent);
     component = fixture.componentInstance;

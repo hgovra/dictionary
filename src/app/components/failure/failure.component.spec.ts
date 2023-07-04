@@ -5,8 +5,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { mobileRoutes, desktopRoutes } from 'src/app/app-routing.module';
 import { WordComponent } from 'src/app/pages/mobile/word/word.component';
 import { WordService } from 'src/app/services/word.service';
-
 import { FailureComponent } from './failure.component';
+import { LoadingComponent } from '../loading/loading.component';
 
 describe('FailureComponent', () => {
   let host: WordComponent;
@@ -23,15 +23,9 @@ describe('FailureComponent', () => {
         RouterTestingModule.withRoutes(desktopRoutes),
         FontAwesomeModule,
       ],
-      declarations: [
-        WordComponent,
-        FailureComponent,
-      ],
-      providers: [
-        WordService
-      ],
-    })
-    .compileComponents();
+      declarations: [LoadingComponent, WordComponent, FailureComponent],
+      providers: [WordService],
+    }).compileComponents();
 
     hostFixture = TestBed.createComponent(WordComponent);
     host = hostFixture.componentInstance;
