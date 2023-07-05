@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "test:jest": "jest --watch"
   },
   "private": true,
   "dependencies": {
@@ -38,9 +39,12 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/user-event": "^14.4.3",
     "@types/jasmine": "^4.3.5",
+    "@types/jest": "^29.5.2",
     "@types/node": "^18.7.13",
     "dotenv-webpack": "^8.0.1",
     "jasmine-core": "~3.10.0",
+    "jest": "^29.6.0",
+    "jest-preset-angular": "^13.1.1",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.0.3",
@@ -48,5 +52,18 @@
     "karma-jasmine-html-reporter": "~1.7.0",
     "typescript": "~4.9.5",
     "webpack": "~5.76.1"
+  },
+  "jest": {
+    "preset": "jest-preset-angular",
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest-config.ts"
+    ],
+    "transform": {
+      "^.+\\.(js|ts|html)$": "jest-preset-angular"
+    },
+    "testMatch": [
+      "**/?(*.)+(jest).ts"
+    ],
+    "testEnvironment": "jsdom"
   }
 }
