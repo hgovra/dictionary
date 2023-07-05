@@ -32,7 +32,13 @@ describe('DesktopComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('mostrar o logo do Dictionary', () => {
+    const fixture = TestBed.createComponent(DesktopComponent);
+
+    fixture.detectChanges();
+
+    const html = fixture.nativeElement as HTMLElement;
+
+    expect(html.querySelector('h1')?.textContent).toContain('Dictionary');
   });
 });
