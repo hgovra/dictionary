@@ -37,8 +37,10 @@ describe('DesktopComponent', () => {
 
     fixture.detectChanges();
 
-    const html = fixture.nativeElement as HTMLElement;
+    const header = (fixture.nativeElement as HTMLElement).querySelector(
+      'h1'
+    )?.textContent;
 
-    expect(html.querySelector('h1')?.textContent).toContain('Dictionary');
+    expect(header).toContain('Dictionary');
   });
 });

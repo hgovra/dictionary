@@ -5,7 +5,7 @@ import { Title } from '@angular/platform-browser';
 import { faAngleLeft, faAngleRight, faArrowsRotate, faBookBookmark, faSadTear, faStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as offStar } from '@fortawesome/free-regular-svg-icons';
 
-import { WordService } from 'src/app/services/word.service';
+import { WordService } from '../../services/word.service';
 
 @Component({
   selector: 'app-desktop',
