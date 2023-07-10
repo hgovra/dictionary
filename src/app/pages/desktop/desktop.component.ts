@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
-import { faAngleLeft, faAngleRight, faArrowsRotate, faBookBookmark, faSadTear, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faAngleRight, faArrowsRotate, faBookBookmark, faL, faSadTear, faStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as offStar } from '@fortawesome/free-regular-svg-icons';
 
 import { WordService } from '../../services/word.service';
@@ -45,11 +45,7 @@ export class DesktopComponent implements OnInit {
           // É favoritada ou não?
           let indexFavved = this.wordService.favorites.indexOf(request);
 
-          if (indexFavved !== -1) {
-            this.wordService.favved = true;
-          } else {
-            this.wordService.favved = false;
-          }
+          this.wordService.favved = indexFavved > -1 ? true : false;
 
           // Atualizar o título na aba do navegador
           if (this.wordService.request) {
