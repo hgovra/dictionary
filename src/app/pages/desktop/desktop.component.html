@@ -4,11 +4,11 @@
     </h1>
 
     <main>
-        <section class="start">
+        <section class="start" role="region">
             <start></start>
         </section>
 
-        <section class="info">
+        <section class="info" role="region">
             <loading *ngIf="wordService.request && wordService.isLoading"></loading>
 
             <ng-container *ngIf="!wordService.isLoading">

@@ -34,13 +34,19 @@ describe('DesktopComponent', () => {
 
   it('mostrar o logo do Dictionary', () => {
     const fixture = TestBed.createComponent(DesktopComponent);
-
-    fixture.detectChanges();
-
     const header = (fixture.nativeElement as HTMLElement).querySelector(
       'h1'
     )?.textContent;
 
     expect(header).toContain('Dictionary');
+  });
+
+  it('montar duas áreas de conteúdo', () => {
+    const fixture = TestBed.createComponent(DesktopComponent);
+    const sections = (fixture.nativeElement as HTMLElement).querySelectorAll(
+      'section'
+    );
+
+    expect(sections.length).toBe(2);
   });
 });

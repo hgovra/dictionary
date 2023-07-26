@@ -4,17 +4,18 @@ import { Injectable } from '@angular/core';
 import wordList from 'word-list-json';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class WordService {
-
   isLoading = true;
 
   // Dados da API
   api: string = process.env['WORD_API_URL'] as string;
 
   // Dados off-line
-  cache: CacheStorage = JSON.parse(localStorage.getItem('dictionary-cache') as string) as unknown as CacheStorage;
+  cache: CacheStorage = JSON.parse(
+    localStorage.getItem('dictionary-cache') as string
+  ) as unknown as CacheStorage;
 
   list: string[] = [];
 
@@ -35,12 +36,14 @@ export class WordService {
   messageConnectFail = {
     title: 'No Internet Connection',
     message: 'We were unable to connect to the server.',
-    resolution: 'Check your connection and try again.'
+    resolution: 'Check your connection and try again.',
   };
   messageNotFound = {
     title: 'No Definitions Found',
-    message: 'Sorry pal, we couldn\'t find definitions for the word you were looking for.',
-    resolution: 'You can try the search again at later time or head to the web instead.'
+    message:
+      "Sorry pal, we couldn't find definitions for the word you were looking for.",
+    resolution:
+      'You can try the search again at later time or head to the web instead.',
   };
 
   failure: Fail | null = null;
@@ -49,9 +52,7 @@ export class WordService {
 
   favved = false;
 
-  constructor(
-    private http: HttpClient,
-  ) {
+  constructor(private http: HttpClient) {
     // Se não houver cache, criar um novo
     if (!this.cache) {
       let emptyCache = {
@@ -59,8 +60,8 @@ export class WordService {
         list: [],
         history: [],
         favorites: [],
-        requested: []
-      }
+        requested: [],
+      };
 
       this.cache = emptyCache as unknown as CacheStorage;
 
@@ -86,8 +87,8 @@ export class WordService {
       list: this.words,
       history: this.history,
       favorites: this.favorites,
-      requested: this.requested
-    }
+      requested: this.requested,
+    };
 
     localStorage.setItem(`dictionary-cache`, JSON.stringify(updatedCache));
   }
@@ -118,14 +119,14 @@ export class WordService {
   updateWordList(): void {
     this.moreWords = [];
 
-    for (let i = 0; i < 120; i++) {
+    while (this.moreWords.length < 120) {
       let newWord = this.randomWord;
 
       // Conferir se a palavra escolhida não é repetida
       if (this.words.indexOf(newWord) < 0) this.moreWords.push(newWord);
     }
 
-    this.words = [... this.words, ...this.moreWords];
+    this.words = [...this.words, ...this.moreWords];
     this.list = [...this.words];
 
     this.saveCache();
@@ -149,39 +150,40 @@ export class WordService {
     const start = pos ? pos : 0;
     const count = pos ? 1 : 0;
 
-    this.getWord(request)
-      .subscribe({
-        next: res => {
-          this.word = res[0];
+    this.getWord(request).subscribe({
+      next: (res) => {
+        this.word = res[0];
 
-          this.requested.splice(start, count, this.word);
+        this.requested.splice(start, count, this.word);
 
-          this.isLoading = false;
-        },
-        error: fail => {
-          if (fail.status === 0 || fail.status === 504) { // Erro de conexão
-            this.failure = this.messageConnectFail;
+        this.isLoading = false;
+      },
+      error: (fail) => {
+        if (fail.status === 0 || fail.status === 504) {
+          // Erro de conexão
+          this.failure = this.messageConnectFail;
 
-            let notFound = {
-              connect: false,
-              word: request
-            }
+          let notFound = {
+            connect: false,
+            word: request,
+          };
 
-            this.requested.unshift(notFound);
-          } else { // Palavra não encontrada
-            this.failure = fail.error;
+          this.requested.unshift(notFound);
+        } else {
+          // Palavra não encontrada
+          this.failure = fail.error;
 
-            let notFound = {
-              connect: true,
-              word: request
-            }
+          let notFound = {
+            connect: true,
+            word: request,
+          };
 
-            this.requested.unshift(notFound);
-          }
-
-          this.isLoading = false;
+          this.requested.unshift(notFound);
         }
-      });
+
+        this.isLoading = false;
+      },
+    });
   }
 
   // Carregar dados da palavra e salvar no histórico
@@ -194,21 +196,25 @@ export class WordService {
 
     let historyIndex = this.history.indexOf(request);
 
-    if (historyIndex === -1) { // Palavra nova
+    if (historyIndex === -1) {
+      // Palavra nova
       this.requestWord(request);
 
       this.history.unshift(request);
     } else {
-      let wordIndex = this.requested.findIndex(x => request === x.word);
+      let wordIndex = this.requested.findIndex((x) => request === x.word);
 
-      if (this.requested[wordIndex]?.meanings) { // Palavra salva no cache
+      if (this.requested[wordIndex]?.meanings) {
+        // Palavra salva no cache
         this.word = this.cache.requested[wordIndex];
 
         this.isLoading = false;
       } else {
-        if (this.requested[wordIndex]?.connect) { // Palavra não encontrada na API
+        if (this.requested[wordIndex]?.connect) {
+          // Palavra não encontrada na API
           this.failure = this.messageNotFound;
-        } else { // Palavra sem dados por erro de conexão
+        } else {
+          // Palavra sem dados por erro de conexão
           this.requestWord(request, wordIndex);
         }
 
