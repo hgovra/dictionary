@@ -1,10 +1,9 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/angular';
-import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { DesktopComponent } from './desktop.component';
 
 import { WordService } from '../../services/word.service';
-import { TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -12,8 +11,6 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { mobileRoutes, desktopRoutes } from '../../app-routing.module';
 import { StackComponent } from '../../components/stack/stack.component';
 import { StartComponent } from '../../components/start/start.component';
-import { ActivatedRoute } from '@angular/router';
-import { Title } from '@angular/platform-browser';
 
 beforeEach(() => {
   TestBed.configureTestingModule({
