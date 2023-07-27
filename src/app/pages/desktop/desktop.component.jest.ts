@@ -1,4 +1,5 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/angular';
+import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { DesktopComponent } from './desktop.component';
 
@@ -11,6 +12,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { mobileRoutes, desktopRoutes } from '../../app-routing.module';
 import { StackComponent } from '../../components/stack/stack.component';
 import { StartComponent } from '../../components/start/start.component';
+
+let service: WordService;
 
 beforeEach(() => {
   TestBed.configureTestingModule({
@@ -75,7 +78,7 @@ describe('DesktopComponent', () => {
     expect(pills.length).toBe(240);
   });
 
-  it('carregar mais palavras toda vez que rolar a lista até o final', async () => {
+  it('continuar carregando mais palavras toda vez que rolar a lista até o final', async () => {
     await render(DesktopComponent);
 
     const onScroll = jest.spyOn(StartComponent.prototype, 'onScroll');
@@ -105,5 +108,25 @@ describe('DesktopComponent', () => {
     await waitFor(() => {
       expect(onScroll).toBeCalledTimes(2);
     });
+  });
+
+  it('renovar a lista de palavras ao clicar no botão', async () => {
+    await render(DesktopComponent);
+
+    service = TestBed.inject(WordService);
+
+    const btnRefresh = screen.getByTestId('refresh-btn');
+
+    // Copiar a lista de palavras para comparação
+
+    const wordsFirst = JSON.parse(JSON.stringify(service.list));
+
+    await userEvent.click(btnRefresh);
+
+    // Copiar a lista de novo depois de atualizar
+
+    const wordsSecond = JSON.parse(JSON.stringify(service.list));
+
+    expect(wordsSecond).not.toEqual(wordsFirst);
   });
 });

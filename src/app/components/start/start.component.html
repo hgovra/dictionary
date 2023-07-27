@@ -10,6 +10,8 @@
         <fa-icon
           class="refresh"
           [icon]="refresh"
+          title="Refresh List"
+          data-testid="refresh-btn"
           (click)="wordService.resetWordList()"
         ></fa-icon>
       </ng-container>
