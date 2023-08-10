@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { faBookBookmark, faSadTear } from '@fortawesome/free-solid-svg-icons';
-import { WordService } from 'src/app/services/word.service';
+import { WordService } from '../../services/word.service';
 
 @Component({
   selector: 'failure',

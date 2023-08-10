@@ -1,5 +1,9 @@
 import type { Config } from 'jest';
 
+// Variáveis de Ambiente
+
+require('dotenv').config({ path: './.env' });
+
 const jestConfig: Config = {
   preset: 'jest-preset-angular',
   verbose: true,

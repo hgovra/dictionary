@@ -1,17 +1,33 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/angular';
-import userEvent from '@testing-library/user-event';
-import '@testing-library/jest-dom';
-import { DesktopComponent } from './desktop.component';
-
-import { WordService } from '../../services/word.service';
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+
+import userEvent from '@testing-library/user-event';
+import '@testing-library/jest-dom';
+
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+
+// Serviços
+
+import { WordService } from '../../services/word.service';
+
+// Rotas
+
 import { mobileRoutes, desktopRoutes } from '../../app-routing.module';
+
+// Componentes
+
+import { DesktopComponent } from './desktop.component';
 import { StackComponent } from '../../components/stack/stack.component';
 import { StartComponent } from '../../components/start/start.component';
+import { BannerComponent } from '../../components/banner/banner.component';
+import { TabsComponent } from '../../components/tabs/tabs.component';
+
+// Mocks
+
+import { successResponse } from '../../../../__mocks__/success-response';
 
 let service: WordService;
 
@@ -25,7 +41,13 @@ beforeEach(() => {
       FontAwesomeModule,
       InfiniteScrollModule,
     ],
-    declarations: [StackComponent, StartComponent, DesktopComponent],
+    declarations: [
+      StackComponent,
+      StartComponent,
+      BannerComponent,
+      TabsComponent,
+      DesktopComponent,
+    ],
     providers: [WordService],
   });
 });
@@ -128,5 +150,25 @@ describe('DesktopComponent', () => {
     const wordsSecond = JSON.parse(JSON.stringify(service.list));
 
     expect(wordsSecond).not.toEqual(wordsFirst);
+  });
+
+  it('carregar detalhes da palavra ao clicar na pílula correspondente', async () => {
+    await render(DesktopComponent);
+
+    service = TestBed.inject(WordService);
+
+    // Simular a função que obtém os dados da palavra escolhida
+    // (no original, retorna um Observable assíncrono)
+
+    const getTestWordDetails = () => {
+      service.word = successResponse[0];
+      service.isLoading = false;
+    };
+
+    jest.spyOn(service, 'getWordDetails').mockReturnValue(getTestWordDetails());
+
+    const title = await screen.findByRole('heading', { name: /happy/i });
+
+    expect(title).toBeInTheDocument();
   });
 });

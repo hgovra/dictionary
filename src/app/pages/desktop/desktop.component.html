@@ -13,7 +13,7 @@
 
             <ng-container *ngIf="!wordService.isLoading">
                 <article *ngIf="wordService.word" class="word">
-                    <h2>{{ wordService.word.word }}
+                    <h2 data-testid="word-title">{{ wordService.word.word }}
                         <fa-icon class="fav off" [icon]="off" *ngIf="!wordService.favved" (click)="wordService.saveFavorite()">
                         </fa-icon>
                         <fa-icon class="fav on" [icon]="on" *ngIf="wordService.favved" (click)="wordService.removeFavorite()">
